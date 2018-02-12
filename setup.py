@@ -17,7 +17,7 @@ if sys.platform == 'darwin':
 
 module = Extension(
     'emoji',
-    sources = ['src/emoji.c'],
+    sources=['src/emoji.c'],
     include_dirs = ['include'],
     library_dirs = ['lib'],
     libraries= ['z', 'skia', 'emoji'],

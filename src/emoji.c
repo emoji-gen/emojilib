@@ -1,7 +1,9 @@
 #include <Python.h>
 
+#include <string.h>
 #include <strings.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #include "emoji.h"
 
@@ -35,6 +37,30 @@ static bool parseFormat(const char* formatString, EgFormat* format) {
     return false;
 }
 
+static bool parseColor(const char* color_string, uint32_t* color) {
+    if (color_string == NULL) return false;
+
+    int length = strlen(color_string);
+    if (length == 0) return false;
+
+    unsigned pos = *color_string == '#' ? 1 : 0;
+    uint32_t scanned_color;
+    if (sscanf(color_string + pos, "%" PRIx32, &scanned_color) != 1) {
+        return false;
+    }
+
+    if (length - pos == 8) {
+        unsigned red = scanned_color >> 24 & 0xff;
+        unsigned green = scanned_color >> 16 & 0xff;
+        unsigned blue = scanned_color >> 8 & 0xff;
+        unsigned alpha = scanned_color & 0xff;
+        *color = alpha << 24 | red << 16 | green < 8 | blue;
+        return true;
+    }
+
+    return false;
+}
+
 static PyObject* emoji_py_generate(
     __attribute__ ((unused)) PyObject* self,
     PyObject* args,
@@ -44,6 +70,8 @@ static PyObject* emoji_py_generate(
     const char* text = "絵文\n字。";
     int width = 128;
     int height = 128;
+    const char* color_string = "#000000FF";
+    const char* background_color_string = "#00000000";
     const char* typeface_name = NULL;
     const char* align_string = "center";
     const char* format_string = "png";
@@ -53,6 +81,8 @@ static PyObject* emoji_py_generate(
         "text",
         "width",
         "height",
+        "color",
+        "background_color",
         "align",
         "typeface_name",
         "format",
@@ -60,9 +90,22 @@ static PyObject* emoji_py_generate(
         NULL
     };
 
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|siisssi", kwlist,
-            &text, &width, &height, &align_string, &typeface_name, &format_string, &quality))
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|siissssi", kwlist,
+            &text, &width, &height, &color_string, &background_color_string,
+            &align_string, &typeface_name, &format_string, &quality))
     {
+        return NULL;
+    }
+
+    uint32_t color;
+    if (!parseColor(color_string, &color)) {
+        PyErr_SetString(PyExc_ValueError, "invalid color format");
+        return NULL;
+    }
+
+    uint32_t background_color;;
+    if (!parseColor(background_color_string, &background_color)) {
+        PyErr_SetString(PyExc_ValueError, "invalid color format");
         return NULL;
     }
 
@@ -87,8 +130,8 @@ static PyObject* emoji_py_generate(
     params.fText = text;
     params.fWidth = width;
     params.fHeight = height;
-    params.fColor = 0xFFEC71A1;
-    params.fBackgroundColor = 0x00FFFFFF;
+    params.fColor = color;
+    params.fBackgroundColor = background_color;
     params.fTextAlign = align;
     params.fTypefaceName = typeface_name;
     params.fFormat = format;
