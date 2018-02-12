@@ -1,12 +1,11 @@
 /build
 /dist
-/lib
 /venv
 
 __pycache__
 *.pyc
-
 *.egg-info
 *.so
+*.a
 
 *.png
