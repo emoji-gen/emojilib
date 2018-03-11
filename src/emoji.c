@@ -1,6 +1,5 @@
 #include <Python.h>
 
-#include <string.h>
 #include <strings.h>
 #include <stdbool.h>
 #include <stdint.h>
