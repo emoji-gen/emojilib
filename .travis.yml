@@ -9,3 +9,7 @@ script:
   - cd $TRAVIS_BUILD_DIR/externals/libemoji
   - cmake .
   - make
+
+notifications:
+  slack:
+    - secure: "h90LwAB3HdCmZZbRFllnmsa5fHZnVA5jXHuOy4fAb3M6QIaZkbWuWwgeqj9jZNUt1gwkpeh5UpDkkRIdrb/rdnlgmzkCL7DZz53jc9BpQ3NXztBvQeaDYD6wBuWjlSGg6C+4V+PqOe03z0NCMwE9XiIL7WDlQNaZ8qwMFazQuiI7szIhogMLd8FnEE+ddFHOKB5eNGwWq261Oik68HT04WGWR1rOWUW/kHgogw+zupiGlea3xgctd8MoptIIu/PawwfXcuoH5gX0BBYGdOl5KIFs7F4eKlvtxZYSpsJntz7+8R6svGB6HaO/nHU43keXYOnfajA0P/ovZEe/ZWy6Gn4T0EWWMreLv+IZHhZtv3tgMePFScmWoXdt6k5ZNUYb9oo4f8piwlbf+wzVfr1gF2cKjpa3auPx5naxG7rJD9U66MLZl3ifw8QC7F0gKvMYZ9AMBnpKAbr/rR1fv+ER7GHXVZNlBJQ9uULq1rdYC/EYwgtbBE2lavGyZjGi/NJ4DUiaswra/3pmayWuK911+zbUhAH2NayHAOejWwSaefQFaMeN+2vdoJT+Occ7cbXAKZoZRFPFvtj2qxwft220KL9NXWy59ga8gNzQ3j9B/8Fi0+kkcuN6Z0eXMt91t3Fal2OTsibOZPvxiqhBal90sXBRLwt5d7CQMXiZ+BRAJpo="
