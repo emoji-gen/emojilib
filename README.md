@@ -1,5 +1,4 @@
-libemoji-py
------------
+# libemoji for Python
 
 ## System requirements
 
