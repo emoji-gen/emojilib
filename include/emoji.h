@@ -1,1 +1,1 @@
-../../libemoji/include/emoji.h
+../externals/libemoji/include/emoji.h
