@@ -8,36 +8,9 @@
 
 static PyObject *EmojiError;
 
+// --------------------------------------------------------------------------------------
 
-static bool parseAlign(const char* alignString, EgAlign* align) {
-    if (strcasecmp(alignString, "left") == 0) {
-        *align = kLeft_Align;
-        return true;
-    }
-    if (strcasecmp(alignString, "center") == 0) {
-        *align = kCenter_Align;
-        return true;
-    }
-    if (strcasecmp(alignString, "right") == 0) {
-        *align = kRight_Align;
-        return true;
-    }
-    return false;
-}
-
-static bool parseFormat(const char* formatString, EgFormat* format) {
-    if (strcasecmp(formatString, "png") == 0) {
-        *format = kPNG_Format;
-        return true;
-    }
-    if (strcasecmp(formatString, "webp") == 0) {
-        *format = kWEBP_Format;
-        return true;
-    }
-    return false;
-}
-
-static bool parseColor(const char* color_string, uint32_t* color) {
+static bool convert_to_color(const char* color_string, uint32_t* color) {
     if (color_string == NULL) return false;
 
     int length = strlen(color_string);
@@ -60,6 +33,36 @@ static bool parseColor(const char* color_string, uint32_t* color) {
 
     return false;
 }
+
+static bool convert_to_align(const char* align_string, EgAlign* align) {
+    if (strcasecmp(align_string, "left") == 0) {
+        *align = kLeft_Align;
+        return true;
+    }
+    if (strcasecmp(align_string, "center") == 0) {
+        *align = kCenter_Align;
+        return true;
+    }
+    if (strcasecmp(align_string, "right") == 0) {
+        *align = kRight_Align;
+        return true;
+    }
+    return false;
+}
+
+static bool convert_to_format(const char* format_string, EgFormat* format) {
+    if (strcasecmp(format_string, "png") == 0) {
+        *format = kPNG_Format;
+        return true;
+    }
+    if (strcasecmp(format_string, "webp") == 0) {
+        *format = kWEBP_Format;
+        return true;
+    }
+    return false;
+}
+
+// --------------------------------------------------------------------------------------
 
 static PyObject* emoji_py_generate(
     __attribute__ ((unused)) PyObject* self,
@@ -99,25 +102,25 @@ static PyObject* emoji_py_generate(
     }
 
     uint32_t color;
-    if (!parseColor(color_string, &color)) {
+    if (!convert_to_color(color_string, &color)) {
         PyErr_SetString(PyExc_ValueError, "invalid color format");
         return NULL;
     }
 
     uint32_t background_color;;
-    if (!parseColor(background_color_string, &background_color)) {
+    if (!convert_to_color(background_color_string, &background_color)) {
         PyErr_SetString(PyExc_ValueError, "invalid color format");
         return NULL;
     }
 
     EgAlign align;
-    if (!parseAlign(align_string, &align)) {
+    if (!convert_to_align(align_string, &align)) {
         PyErr_SetString(PyExc_ValueError, "`align` should be one of \"Left\", \"Center\" or \"Right\"");
         return NULL;
     }
 
     EgFormat format;
-    if (!parseFormat(format_string, &format)) {
+    if (!convert_to_format(format_string, &format)) {
         PyErr_SetString(PyExc_ValueError, "`format` should be one of \"PNG\" or \"WEBP\"");
         return NULL;
     }
@@ -165,6 +168,8 @@ static PyObject* emoji_py_generate(
     emoji_free(&result);
     return data;
 }
+
+// --------------------------------------------------------------------------------------
 
 static PyMethodDef EmojiMethods[] = {
     { "generate", (PyCFunction)emoji_py_generate, METH_VARARGS | METH_KEYWORDS, "" },
