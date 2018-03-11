@@ -32,4 +32,4 @@ data = emoji.generate(text="絵文字。", width=128, height=128)
 ```
 
 ## License
-MIT &copy; Pine Mizune
+MIT &copy; Emoji Generator
