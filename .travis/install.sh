@@ -12,5 +12,6 @@ pyenv install 3.6.4
 pyenv global 3.6.4
 pyenv rehash
 
+python -m pip install --user virtualenv
 python -m virtualenv .venv
 source .venv/bin/activate
