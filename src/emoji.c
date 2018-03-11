@@ -9,6 +9,7 @@
 
 static PyObject *EmojiError;
 
+
 static bool parseAlign(const char* alignString, EgAlign* align) {
     if (strcasecmp(alignString, "left") == 0) {
         *align = kLeft_Align;
@@ -67,7 +68,7 @@ static PyObject* emoji_py_generate(
     PyObject *kwargs
     )
 {
-    const char* text = "絵文\n字。";
+    const char* text = "";
     int width = 128;
     int height = 128;
     const char* color_string = "#000000FF";
@@ -90,6 +91,7 @@ static PyObject* emoji_py_generate(
         NULL
     };
 
+    // バリデーション
     if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|siissssi", kwlist,
             &text, &width, &height, &color_string, &background_color_string,
             &align_string, &typeface_name, &format_string, &quality))
@@ -126,6 +128,7 @@ static PyObject* emoji_py_generate(
         return NULL;
     }
 
+    // パラメーター生成
     EgGenerateParams params;
     params.fText = text;
     params.fWidth = width;
@@ -137,13 +140,29 @@ static PyObject* emoji_py_generate(
     params.fFormat = format;
     params.fQuality = quality;
 
+    // 生成
     EgGenerateResult result;
-    emoji_generate(&params, &result);
+    EgError err = emoji_generate(&params, &result);
+    if (err != EG_OK) {
+        if (err == EG_INVALID_PARAMETER) {
+            emoji_free(&result);
+            PyErr_SetString(EmojiError, "invalid parameter");
+            return NULL;
+        }
+
+        emoji_free(&result);
+        PyErr_SetString(EmojiError, "unknown error");
+        return NULL;
+    }
 
     PyObject* data = Py_BuildValue("y#", result.fData, result.fSize);
-    emoji_free(&result);
-    if (data == NULL) return NULL;
+    if (data == NULL) {
+        emoji_free(&result);
+        PyErr_SetString(EmojiError, "cannot generate emoji data");
+        return NULL;
+    }
 
+    emoji_free(&result);
     return data;
 }
 
