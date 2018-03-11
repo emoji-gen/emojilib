@@ -22,5 +22,14 @@ $ . venv/bin/activate
 $ python setup.py build
 ```
 
+## Example
+
+```python
+import emoji
+
+data = emoji.generate(text="絵文字。", width=128, height=128)
+
+```
+
 ## License
 MIT &copy; Pine Mizune
