@@ -14,4 +14,6 @@ pyenv rehash
 
 python -m pip install --user virtualenv
 python -m virtualenv .venv
+
+VIRTUAL_ENV_DISABLE_PROMPT=true
 source .venv/bin/activate
