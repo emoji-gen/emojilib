@@ -1,11 +1,11 @@
+os: osx
 osx_image: xcode9.2
-language: objective-c
+language: generic
+
+install:
+  - ./.travis/install.sh
 
 script:
-  - cd $TRAVIS_BUILD_DIR
-  - python --version
-  - python3 --version
-
   - cd $TRAVIS_BUILD_DIR/externals/libemoji
   - cmake .
   - make
