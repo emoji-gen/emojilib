@@ -129,6 +129,7 @@ static PyObject* emoji_py_generate(
 
     // パラメーター生成
     EgGenerateParams params;
+    memset(&params, 0, sizeof(params));
     params.fText = text;
     params.fWidth = width;
     params.fHeight = height;
