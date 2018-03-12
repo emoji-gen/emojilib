@@ -6,13 +6,18 @@ from setuptools import setup, Extension
 
 
 extra_link_args = []
-if sys.platform == 'darwin':
+if sys.platform.startswith('darwin'):
     extra_link_args.extend([
         '-framework', 'CoreFoundation',
         '-framework', 'CoreGraphics',
         '-framework', 'CoreText',
         '-framework', 'CoreServices',
     ])
+elif sys.platform.startswith('linux')
+    extra_link_args.extend([
+        '-fPIC',
+    ])
+
 
 
 module = Extension(
@@ -32,7 +37,7 @@ module = Extension(
 
 setup(
     name='libemoji',
-    version='0.1.0',
+    version='0.1.1',
     description = 'Ultimate Emoji Generator library using Skia and Python C Extension',
     url='https://github.com/emoji-gen/libemoji-py',
     author='Emoji Generator',
