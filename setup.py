@@ -13,7 +13,7 @@ if sys.platform.startswith('darwin'):
         '-framework', 'CoreText',
         '-framework', 'CoreServices',
     ])
-elif sys.platform.startswith('linux')
+elif sys.platform.startswith('linux'):
     extra_link_args.extend([
         '-fPIC',
     ])
