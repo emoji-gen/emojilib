@@ -14,6 +14,10 @@ build:
           cmake .
           make
     - script:
+        name: build
+        code: |
+          python setup.py build
+    - script:
         name: output dummy file
         code: |
           touch $WERCKER_OUTPUT_DIR/dummy
