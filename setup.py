@@ -31,9 +31,12 @@ module = Extension(
 )
 
 setup(
-    name = 'libemoji',
-    version = '1.0',
-    description = '',
-    test_suite = 'test.emoji',
-    ext_modules = [module]
+    name='libemoji',
+    version='1.0',
+    description = 'Ultimate Emoji Generator library using Skia and Python C Extension',
+    url='https://github.com/emoji-gen/libemoji-py',
+    author='Emoji Generator',
+    author_email='pinemz+emoji@gmail.com',
+    test_suite='test.emoji',
+    ext_modules=[module]
 )
