@@ -35,7 +35,7 @@ $ python setup.py build
 ```python
 import emoji
 
-data = emoji.generate(text="絵文字。", width=128, height=128)
+data = emoji.generate(text="絵文\n字。", width=128, height=128)
 
 ```
 
