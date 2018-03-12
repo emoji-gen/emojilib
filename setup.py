@@ -5,6 +5,10 @@ import sys
 from setuptools import setup, Extension
 
 
+libraries = [
+    'skia',
+    'emoji',
+]
 extra_compile_args = [
     '-std=c11',
     '-Wall',
@@ -20,6 +24,15 @@ if sys.platform.startswith('darwin'):
         '-framework', 'CoreServices',
     ])
 elif sys.platform.startswith('linux'):
+    libraries.extend([
+        'dl',
+        'fontconfig',
+        'freetype',
+        'GL',
+    ])
+    extra_link_args.extend([
+        '-pthread',
+    ])
     extra_compile_args.extend([
         '-fPIC',
     ])
@@ -31,7 +44,7 @@ module = Extension(
     sources=['src/emoji.c'],
     include_dirs=['include'],
     library_dirs=['lib'],
-    libraries=['z', 'skia', 'emoji'],
+    libraries=libraries,
     extra_compile_args=extra_compile_args,
     extra_link_args=extra_link_args,
     language='c11'
