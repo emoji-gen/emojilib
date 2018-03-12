@@ -29,6 +29,7 @@ elif sys.platform.startswith('linux'):
         'fontconfig',
         'freetype',
         'GL',
+        'GLU',
     ])
     extra_link_args.extend([
         '-pthread',
@@ -60,6 +61,7 @@ setup(
     license='MIT License',
     classifiers=[
         'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 3.6'
     ],
     test_suite='test.emoji',
     ext_modules=[module]
