@@ -1,0 +1,26 @@
+box: debian
+build:
+  steps:
+    - install-packages:
+      packages: git cmake g++ python libfontconfig1-dev libx11-dev libxcomposite-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
+    - script:
+        name: setup git submodule
+        code: |
+          git submodule update --init --recursive --depth 1
+    - script:
+        name: build externals
+        code: |
+          cd externals/libemoji
+          cmake .
+          make
+    - script:
+        name: output dummy file
+        code: |
+          touch $WERCKER_OUTPUT_DIR/dummy
+  after-steps:
+    - install-packages:
+        packages: ruby
+    - wantedly/pretty-slack-notify:
+        webhook_url: $SLACK_WEBHOOK_URL
+        channel: emoji
+
