@@ -25,7 +25,7 @@ static bool convert_to_color(const char* color_string, uint32_t* color) {
         unsigned green = scanned_color >> 16 & 0xff;
         unsigned blue = scanned_color >> 8 & 0xff;
         unsigned alpha = scanned_color & 0xff;
-        *color = alpha << 24 | red << 16 | green < 8 | blue;
+        *color = alpha << 24 | red << 16 | green << 8 | blue;
         return true;
     }
 
