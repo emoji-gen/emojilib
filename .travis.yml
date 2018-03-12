@@ -5,8 +5,8 @@ language: generic
 install:
   - ./.travis/install.sh
 
-# before_script:
-#   - ./.travis/build_externals.sh
+before_script:
+  - ./.travis/build_externals.sh
 
 script:
   - ./.travis/run.sh

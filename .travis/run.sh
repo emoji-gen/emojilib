@@ -10,3 +10,6 @@ eval "$(pyenv init -)"
 # setup venv
 VIRTUAL_ENV_DISABLE_PROMPT=true
 source .venv/bin/activate
+
+# run
+python setup.py build test
