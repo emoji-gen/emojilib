@@ -6,8 +6,6 @@
 
 #include "emoji.h"
 
-static PyObject *EmojiError;
-
 // --------------------------------------------------------------------------------------
 
 static bool convert_to_color(const char* color_string, uint32_t* color) {
@@ -63,6 +61,8 @@ static bool convert_to_format(const char* format_string, EgFormat* format) {
 }
 
 // --------------------------------------------------------------------------------------
+
+static PyObject* EmojiError;
 
 static PyObject* emoji_py_generate(
     __attribute__ ((unused)) PyObject* self,
