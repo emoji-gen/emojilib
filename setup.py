@@ -31,7 +31,7 @@ module = Extension(
 )
 
 setup(
-    name = 'emoji',
+    name = 'libemoji',
     version = '1.0',
     description = '',
     test_suite = 'test.emoji',
