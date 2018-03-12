@@ -24,7 +24,7 @@ build:
     - script:
         name: build
         code: |
-          python setup.py build
+          python3 setup.py build
     - script:
         name: output dummy file
         code: |
