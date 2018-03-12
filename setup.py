@@ -42,6 +42,7 @@ setup(
     url='https://github.com/emoji-gen/libemoji-py',
     author='Emoji Generator',
     author_email='pinemz+emoji@gmail.com',
+    license='MIT License',
     classifier=[
         'License :: OSI Approved :: MIT License',
     ],
