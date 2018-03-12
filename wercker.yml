@@ -6,7 +6,7 @@ build:
     - script:
         name: setup git submodule
         code: |
-          git submodule update --init --recursive --depth 1
+          git submodule update --init --recursive
     - script:
         name: build externals
         code: |
