@@ -1,4 +1,4 @@
-box: debian
+box: python:3.6.4-stretch
 build:
   steps:
     - install-packages:
