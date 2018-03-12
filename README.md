@@ -8,7 +8,15 @@
 
 ## How to build
 ### 1. Compile libemoji
-First, please build [libemoji](https://github.com/emoji-gen/libemoji) and copy `libskia.a` and `libemoji.a` for the lib directory
+First, please build externals.
+See also [libemoji](https://github.com/emoji-gen/libemoji)'s README.
+
+```
+$ git submodule update --init --recursive
+$ cd externals/libemoji
+$ cmake .
+$ make
+```
 
 ### 2. Setup Python virtualenv
 ```
