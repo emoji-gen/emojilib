@@ -5,7 +5,13 @@ import sys
 from setuptools import setup, Extension
 
 
+extra_compile_args = [
+    '-std=c11',
+    '-Wall',
+    '-Wextra',
+]
 extra_link_args = []
+
 if sys.platform.startswith('darwin'):
     extra_link_args.extend([
         '-framework', 'CoreFoundation',
@@ -14,7 +20,7 @@ if sys.platform.startswith('darwin'):
         '-framework', 'CoreServices',
     ])
 elif sys.platform.startswith('linux'):
-    extra_link_args.extend([
+    extra_compile_args.extend([
         '-fPIC',
     ])
 
@@ -23,14 +29,10 @@ elif sys.platform.startswith('linux'):
 module = Extension(
     'emoji',
     sources=['src/emoji.c'],
-    include_dirs = ['include'],
-    library_dirs = ['lib'],
-    libraries= ['z', 'skia', 'emoji'],
-    extra_compile_args=[
-        '-std=c11',
-        '-Wall',
-        '-Wextra',
-    ],
+    include_dirs=['include'],
+    library_dirs=['lib'],
+    libraries=['z', 'skia', 'emoji'],
+    extra_compile_args=extra_compile_args,
     extra_link_args=extra_link_args,
     language='c11'
 )
@@ -43,7 +45,7 @@ setup(
     author='Emoji Generator',
     author_email='pinemz+emoji@gmail.com',
     license='MIT License',
-    classifier=[
+    classifiers=[
         'License :: OSI Approved :: MIT License',
     ],
     test_suite='test.emoji',
