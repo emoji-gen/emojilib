@@ -1,4 +1,5 @@
 # libemoji for Python
+[![Build Status](https://travis-ci.org/emoji-gen/libemoji-py.svg?branch=master)](https://travis-ci.org/emoji-gen/libemoji-py)
 
 ## System requirements
 
