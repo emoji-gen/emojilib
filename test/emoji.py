@@ -1,4 +1,7 @@
+import sys
 import unittest
+
+print(sys.path)
 
 import emoji
 
