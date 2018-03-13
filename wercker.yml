@@ -24,7 +24,7 @@ build:
     - script:
         name: install dependencies
         code: |
-          pip install -r requirements-dev.txt
+          python3 -m pip install -r requirements-dev.txt
     - script:
         name: build
         code: |
