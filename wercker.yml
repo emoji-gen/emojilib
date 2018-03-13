@@ -29,7 +29,7 @@ build:
         name: build
         code: |
           python3 setup.py build
-          gcc -pthread -shared build/temp.linux-x86_64-3.6/src/emoji.o-o build/lib.linux-x86_64-3.6/emoji.cpython-36m-x86_64-linux-gnu.so -Llib -L/usr/local/lib -lskia -lemoji -ldl -lfontconfig -lfreetype -lGL -lGLU -lpython3.6m
+          gcc -pthread -shared build/temp.linux-x86_64-3.6/src/emoji.o build/lib.linux-x86_64-3.6/emoji.cpython-36m-x86_64-linux-gnu.so -Llib -L/usr/local/lib -lskia -lemoji -ldl -lfontconfig -lfreetype -lGL -lGLU -lpython3.6m
           cp build/lib.linux-x86_64-3.6/emoji.cpython-36m-x86_64-linux-gnu.so .
     - script:
         name: test
