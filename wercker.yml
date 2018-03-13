@@ -22,9 +22,17 @@ build:
           cmake .
           make
     - script:
+        name: install dependencies
+        code: |
+          pip install -r requirements-dev.txt
+    - script:
         name: build
         code: |
           python3 setup.py build
+    - script:
+        name: test
+        code: |
+          python3 -m pytest test
     - script:
         name: output dummy file
         code: |
