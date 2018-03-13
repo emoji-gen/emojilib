@@ -31,12 +31,6 @@ elif sys.platform.startswith('linux'):
         'GL',
         'GLU',
     ])
-    extra_link_args.extend([
-        '-pthread',
-    ])
-    extra_compile_args.extend([
-        '-fPIC',
-    ])
 
 
 
