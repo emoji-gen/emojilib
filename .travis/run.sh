@@ -12,4 +12,6 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 source .venv/bin/activate
 
 # run
-python setup.py build test
+python setup.py build
+ls -l
+python setup.py test
