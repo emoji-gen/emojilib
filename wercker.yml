@@ -29,6 +29,7 @@ build:
         name: build
         code: |
           python3 setup.py build install
+          ldd build/lib.linux-x86_64-3.6/emoji.cpython-36m-x86_64-linux-gnu.so
     - script:
         name: test
         code: |
