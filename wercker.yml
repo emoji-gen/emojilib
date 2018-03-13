@@ -28,7 +28,7 @@ build:
     - script:
         name: build
         code: |
-          python3 setup.py build
+          python3 setup.py build install
     - script:
         name: test
         code: |
