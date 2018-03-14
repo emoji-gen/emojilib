@@ -43,5 +43,12 @@ data = emoji.generate(text="絵文\n字。", width=128, height=128)
 
 ```
 
+## Development
+### Test
+
+```
+$ python setup.py test
+```
+
 ## License
 MIT &copy; Emoji Generator
