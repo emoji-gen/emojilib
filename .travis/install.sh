@@ -20,3 +20,6 @@ python -m virtualenv .venv
 # setup virtualenv
 VIRTUAL_ENV_DISABLE_PROMPT=true
 source .venv/bin/activate
+
+# install requirements
+pip install -r requirements-dev.txt
