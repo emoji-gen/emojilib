@@ -16,4 +16,4 @@ python setup.py build
 cp build/lib.*/emoji.*.so .
 
 # test
-python -m pytest test
+python setup.py test

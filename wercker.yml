@@ -33,7 +33,7 @@ build:
     - script:
         name: test
         code: |
-          python3 -m pytest test
+          python3 setup.py test
     - script:
         name: output dummy file
         code: |

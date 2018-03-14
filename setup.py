@@ -60,6 +60,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6'
     ],
-    test_suite='test.emoji',
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
     ext_modules=[module]
 )

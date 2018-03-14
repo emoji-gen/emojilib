@@ -5,8 +5,12 @@
 __pycache__
 *.pyc
 *.egg-info
-*.so
-*.a
+.eggs
+
 .pytest_cache
 
+*.so
+*.a
 *.png
+
+
