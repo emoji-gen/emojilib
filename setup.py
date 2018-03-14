@@ -49,7 +49,7 @@ module = Extension(
 
 setup(
     name='libemoji',
-    version='0.1.1',
+    version='0.0.1',
     description='Ultimate Emoji Generator library using Skia and Python C Extension',
     url='https://github.com/emoji-gen/libemoji-py',
     author='Emoji Generator',
