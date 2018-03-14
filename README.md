@@ -3,9 +3,13 @@
 
 ## System requirements
 
-- macOS or Ubuntu
 - Python 3.5.x or later
 - C11 Compiler
+
+## Official supported platforms
+
+- macOS 10.12 Sierra
+- Debian 9 Stretch
 
 ## How to build
 ### 1. Compile libemoji
