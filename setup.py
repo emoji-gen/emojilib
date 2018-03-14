@@ -5,9 +5,9 @@ import sys
 from setuptools import setup, Extension
 
 
-libraries = [
-    'skia',
-    'emoji',
+objects = [
+    'lib/libemoji.a',
+    'lib/libskia.a',
 ]
 extra_compile_args = [
     '-std=c11',
@@ -15,7 +15,7 @@ extra_compile_args = [
     '-Wextra',
 ]
 extra_link_args = []
-
+libraries = []
 if sys.platform.startswith('darwin'):
     extra_link_args.extend([
         '-framework', 'CoreFoundation',
@@ -38,7 +38,7 @@ module = Extension(
     'emoji',
     sources=['src/emoji.c'],
     include_dirs=['include'],
-    library_dirs=['lib'],
+    extra_objects=objects,
     libraries=libraries,
     extra_compile_args=extra_compile_args,
     extra_link_args=extra_link_args,
