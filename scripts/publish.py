@@ -4,6 +4,7 @@
 import os
 import sys
 import subprocess
+from subprocess import CalledProcessError
 from importlib import machinery
 from pathlib import Path
 
@@ -33,12 +34,14 @@ def find_release_version():
 def find_gemfary_packages():
     subprocess.run(['fury', '-v'], stdout=subprocess.PIPE, check=True)
     try:
-        process = subprocess.run(
-            ['fury', 'list', '--as=' + GEMFURY_AS],
+        process = subprocess.run([
+            'fury', 'list', '--as=' + GEMFURY_AS,
+            '--api-token=' + os.environ['GEMFURY_API_TOKEN']],
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
-    except subprocess.CalledProcessError as e:
-        print(e.stdout.decode('utf-8'))
-        raise
+    except CalledProcessError as e:
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
     else:
         packages = process.stdout.decode('utf-8')
         return packages
