@@ -37,7 +37,7 @@ def find_gemfary_packages():
             ['fury', 'list', '--as=' + GEMFURY_AS],
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
     except subprocess.CalledProcessError as e:
-        print(e.stdout)
+        print(e.stdout.decode('utf-8'))
         raise
     else:
         packages = process.stdout.decode('utf-8')
