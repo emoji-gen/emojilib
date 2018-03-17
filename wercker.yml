@@ -38,6 +38,9 @@ build:
     - script:
         name: publish
         code: |
+          echo "machine git.fury.io" >> ~/.netrc
+          echo "  login     $GEMFURY_EMAIL" >> ~/.netrc
+          echo "  password  $GEMFURY_PASSWORD" >> ~/.netrc
           python3 scripts/publish.py
     - script:
         name: output dummy file
