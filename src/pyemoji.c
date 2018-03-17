@@ -64,7 +64,7 @@ static bool convert_to_format(const char* format_string, EgFormat* format) {
 
 static PyObject* EmojiError;
 
-static PyObject* emoji_py_generate(
+static PyObject* pyemoji_generate(
     __attribute__ ((unused)) PyObject* self,
     PyObject* args,
     PyObject *kwargs
@@ -172,14 +172,14 @@ static PyObject* emoji_py_generate(
 // --------------------------------------------------------------------------------------
 
 static PyMethodDef EmojiMethods[] = {
-    { "generate", (PyCFunction)emoji_py_generate, METH_VARARGS | METH_KEYWORDS, "" },
+    { "generate", (PyCFunction)pyemoji_generate, METH_VARARGS | METH_KEYWORDS, "" },
     { NULL, NULL, 0, NULL }
 };
 
 
 static struct PyModuleDef module = {
     PyModuleDef_HEAD_INIT,
-    "emoji",
+    "pyemoji",
     NULL,
     -1,
     EmojiMethods
@@ -194,7 +194,7 @@ PyInit_emoji(void)
     if (m == NULL)
         return NULL;
 
-    EmojiError = PyErr_NewException("emoji.error", NULL, NULL);
+    EmojiError = PyErr_NewException("pyemoji.error", NULL, NULL);
     Py_INCREF(EmojiError);
     PyModule_AddObject(m, "error", EmojiError);
 

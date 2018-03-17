@@ -38,8 +38,8 @@ elif sys.platform.startswith('linux'):
 
 def main():
     module = Extension(
-        'emoji',
-        sources=['src/emoji.c'],
+        'pyemoji',
+        sources=['src/pyemoji.c'],
         include_dirs=['include'],
         extra_objects=extra_objects,
         libraries=libraries,
