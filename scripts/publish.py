@@ -53,8 +53,9 @@ def find_gemfary_versions():
             '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
     except CalledProcessError as e:
-        print(e)
-        raise
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
     else:
         versions = process.stdout.decode('utf-8')
         return versions
@@ -74,7 +75,8 @@ def push_to_gemfary(wheel_path):
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
     except CalledProcessError as e:
         print(e.output)
-        raise
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
 
 
 def publish():
