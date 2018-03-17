@@ -7,16 +7,16 @@ import subprocess
 from importlib import machinery
 from pathlib import Path
 
-from pygit2 import Repository
+from git import Repo
 
 GEMFURY_AS = 'emoji-gen'
 PACKAGE_NAME = 'libemoji'
 
 
 def find_branch():
-    repo = Repository('.')
-    branch = repo.head.shorthand
-    return branch
+    repo = Repo('.')
+    branch = repo.active_branch
+    return branch.name
 
 
 def find_release_version():
