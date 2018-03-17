@@ -13,7 +13,7 @@ source .venv/bin/activate
 
 # build
 python setup.py build
-cp build/lib.*/emoji.*.so .
+cp build/lib.*/pyemoji.*.so .
 
 # test
 python setup.py test
