@@ -4,6 +4,8 @@
 import sys
 from setuptools import setup, Extension
 
+VERSION = '0.1.0'
+
 
 extra_objects = [
     'lib/libemoji.a',
@@ -34,33 +36,36 @@ elif sys.platform.startswith('linux'):
     ])
 
 
+def main():
+    module = Extension(
+        'emoji',
+        sources=['src/emoji.c'],
+        include_dirs=['include'],
+        extra_objects=extra_objects,
+        libraries=libraries,
+        extra_compile_args=extra_compile_args,
+        extra_link_args=extra_link_args,
+        language='c11'
+    )
 
-module = Extension(
-    'emoji',
-    sources=['src/emoji.c'],
-    include_dirs=['include'],
-    extra_objects=extra_objects,
-    libraries=libraries,
-    extra_compile_args=extra_compile_args,
-    extra_link_args=extra_link_args,
-    language='c11'
-)
+    setup(
+        name='libemoji',
+        version=VERSION,
+        description='Ultimate Emoji Generator library using Skia and Python C Extension',
+        url='https://github.com/emoji-gen/libemoji-py',
+        author='Emoji Generator',
+        author_email='pinemz+emoji@gmail.com',
+        license='MIT License',
+        classifiers=[
+            'Development Status :: 3 - Alpha',
+            'License :: OSI Approved :: MIT License',
+            'Programming Language :: Python :: 3.6'
+        ],
+        setup_requires=['pytest-runner'],
+        tests_require=['pytest'],
+        ext_modules=[module]
+    )
 
 
-setup(
-    name='libemoji',
-    version='0.0.1',
-    description='Ultimate Emoji Generator library using Skia and Python C Extension',
-    url='https://github.com/emoji-gen/libemoji-py',
-    author='Emoji Generator',
-    author_email='pinemz+emoji@gmail.com',
-    license='MIT License',
-    classifiers=[
-        'Development Status :: 3 - Alpha',
-        'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6'
-    ],
-    setup_requires=['pytest-runner'],
-    tests_require=['pytest'],
-    ext_modules=[module]
-)
+if __name__ == '__main__'
+    main()
