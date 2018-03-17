@@ -39,9 +39,9 @@ $ python setup.py build
 ## Example
 
 ```python
-import emojilib
+import pyemoji
 
-data = emoji.generate(text="絵文\n字。", width=128, height=128)
+data = pyemoji.generate(text="絵文\n字。", width=128, height=128)
 
 ```
 
