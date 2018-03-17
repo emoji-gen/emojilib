@@ -32,17 +32,22 @@ def find_release_version():
 
 def find_gemfary_packages():
     subprocess.run(['fury', '-v'], stdout=subprocess.PIPE, check=True)
-    process = subprocess.run(
-        ['fury', 'list', '--as=' + GEMFURY_AS],
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
-    packages = process.stdout.decode('utf-8')
-    return packages
+    try:
+        process = subprocess.run(
+            ['fury', 'list', '--as=' + GEMFURY_AS],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    except subprocess.CalledProcessError as e:
+        print(e.stdout)
+        raise
+    else:
+        packages = process.stdout.decode('utf-8')
+        return packages
 
 
 def find_gemfary_versions():
     process = subprocess.run(
         ['fury', 'versions', PACKAGE_NAME, '--as=' + GEMFURY_AS],
-        stdout=subprocess.PIPE, check=True)
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
     versions = process.stdout.decode('utf-8')
     return versions
 
