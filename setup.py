@@ -49,10 +49,10 @@ def main():
     )
 
     setup(
-        name='libemoji',
+        name='emojilib',
         version=VERSION,
         description='Ultimate Emoji Generator library using Skia and Python C Extension',
-        url='https://github.com/emoji-gen/libemoji-py',
+        url='https://github.com/emoji-gen/emojilib',
         author='Emoji Generator',
         author_email='pinemz+emoji@gmail.com',
         license='MIT License',
