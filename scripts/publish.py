@@ -14,6 +14,10 @@ PACKAGE_NAME = 'libemoji'
 
 
 def find_branch():
+    wercker_branch = os.environ['WERCKER_GIT_BRANCH']
+    if wercker_branch:
+        return wercker_branch
+
     repo = Repo('.')
     branch = repo.active_branch
     return branch.name
