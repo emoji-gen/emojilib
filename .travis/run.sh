@@ -17,3 +17,6 @@ cp build/lib.*/emoji.*.so .
 
 # test
 python setup.py test
+
+# release
+python ./scripts/publish.py
