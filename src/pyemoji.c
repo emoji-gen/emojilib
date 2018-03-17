@@ -186,7 +186,7 @@ static struct PyModuleDef module = {
 };
 
 PyMODINIT_FUNC
-PyInit_emoji(void)
+PyInit_pyemoji(void)
 {
     PyObject *m;
 
