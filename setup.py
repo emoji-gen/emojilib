@@ -49,7 +49,7 @@ def main():
     )
 
     setup(
-        name='emojilib',
+        name='pyemoji',
         version=VERSION,
         description='Ultimate Emoji Generator library using Skia and Python C Extension',
         url='https://github.com/emoji-gen/emojilib',

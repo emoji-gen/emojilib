@@ -12,7 +12,7 @@ from git import Repo
 
 GEMFURY_AS = 'emoji-gen'
 GEMFURY_API_TOKEN = os.environ['GEMFURY_API_TOKEN']
-PACKAGE_NAME = 'emojilib'
+PACKAGE_NAME = 'pyemoji'
 
 
 def find_branch():
