@@ -12,7 +12,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=true
 source .venv/bin/activate
 
 # build
-python setup.py build
+python setup.py bdist_wheel
 cp build/lib.*/pyemoji.*.so .
 
 # test
