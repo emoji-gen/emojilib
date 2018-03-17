@@ -118,8 +118,7 @@ def publish():
         print(versions)
 
         if release_version in versions:
-            print('{} is already released'.format(release_version))
-            return
+            print('WARN: {} is already released'.format(release_version))
 
     push_to_gemfary(wheel_path)
 
