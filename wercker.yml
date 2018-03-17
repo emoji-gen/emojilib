@@ -28,12 +28,16 @@ build:
     - script:
         name: build
         code: |
-          python3 setup.py build
+          python3 setup.py bdist_wheel
           cp build/lib.*/emoji.*.so .
     - script:
         name: test
         code: |
           python3 setup.py test
+    - script:
+        name: publish
+        code: |
+          python3 scripts/publish.py
     - script:
         name: output dummy file
         code: |
