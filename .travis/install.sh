@@ -23,3 +23,4 @@ source .venv/bin/activate
 
 # install requirements
 pip install -r requirements-dev.txt
+gem install gemfury --no-document

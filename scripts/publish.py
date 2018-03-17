@@ -4,19 +4,23 @@
 import os
 import sys
 import subprocess
+from subprocess import CalledProcessError
 from importlib import machinery
 from pathlib import Path
 
 from git import Repo
 
 GEMFURY_AS = 'emoji-gen'
+GEMFURY_API_TOKEN = os.environ['GEMFURY_API_TOKEN']
 PACKAGE_NAME = 'libemoji'
 
 
 def find_branch():
-    wercker_branch = os.environ['WERCKER_GIT_BRANCH']
-    if wercker_branch:
-        return wercker_branch
+    if 'WERCKER_GIT_BRANCH' in os.environ:
+        return os.environ['WERCKER_GIT_BRANCH']
+
+    if 'TRAVIS_BRANCH' in os.environ:
+        return os.environ['TRAVIS_BRANCH']
 
     repo = Repo('.')
     branch = repo.active_branch
@@ -32,18 +36,31 @@ def find_release_version():
 
 def find_gemfary_packages():
     subprocess.run(['fury', '-v'], stdout=subprocess.PIPE, check=True)
-    process = subprocess.run(
-        ['fury', 'list', '--as=' + GEMFURY_AS], stdout=subprocess.PIPE, check=True)
-    packages = process.stdout.decode('utf-8')
-    return packages
+    try:
+        process = subprocess.run(['fury', 'list',
+            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    except CalledProcessError as e:
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
+    else:
+        packages = process.stdout.decode('utf-8')
+        return packages
 
 
 def find_gemfary_versions():
-    process = subprocess.run(
-        ['fury', 'versions', PACKAGE_NAME, '--as=' + GEMFURY_AS],
-        stdout=subprocess.PIPE, check=True)
-    versions = process.stdout.decode('utf-8')
-    return versions
+    try:
+        process = subprocess.run(['fury', 'versions', PACKAGE_NAME,
+            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    except CalledProcessError as e:
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
+    else:
+        versions = process.stdout.decode('utf-8')
+        return versions
 
 
 def find_wheel_path(version):
@@ -54,7 +71,14 @@ def find_wheel_path(version):
 
 
 def push_to_gemfary(wheel_path):
-    subprocess.run(['fury', 'push', wheel_path, '--as=' + GEMFURY_AS], check=True)
+    try:
+        subprocess.run(['fury', 'push', wheel_path,
+            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    except CalledProcessError as e:
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
 
 
 def publish():
@@ -96,8 +120,7 @@ def publish():
         print(versions)
 
         if release_version in versions:
-            print('{} is already released'.format(release_version))
-            return
+            print('WARN: {} is already released'.format(release_version))
 
     push_to_gemfary(wheel_path)
 
