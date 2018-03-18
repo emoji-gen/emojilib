@@ -1,14 +1,6 @@
 build:
-  box: python:3.6.4-stretch
+  box: emojigen/docker-pyemoji
   steps:
-    - script:
-        name: remove python3 symlinks
-        code: |
-          cd /usr/local/bin
-          rm -f idle
-          rm -f pydoc
-          rm -f python
-          rm -f python-config
     - install-packages:
       packages: git cmake g++ python libfontconfig1-dev libx11-dev libxcomposite-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev ruby
     - script:
