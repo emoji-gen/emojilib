@@ -51,7 +51,7 @@ build:
         channel: emoji
 
 py35:
-  box: python:3.5.5-stretch
+  box: python:3.5.5-jessie
   steps:
     - script:
         name: remove python3 symlinks
