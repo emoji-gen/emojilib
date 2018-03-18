@@ -2,26 +2,20 @@ build:
   box: emojigen/docker-pyemoji
   steps:
     - install-packages:
-      packages: git cmake g++ python libfontconfig1-dev libx11-dev libxcomposite-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev ruby
-    - script:
-        name: setup git submodule
-        code: |
-          git submodule update --init --recursive
-    - script:
-        name: build externals
-        code: |
-          cd externals/libemoji
-          cmake .
-          make
+      packages: ruby
     - script:
         name: install dependencies
         code: |
-          python3 -m pip install -r requirements-dev.txt
-          gem install gemfury --no-document
+          ./.wercker/install.sh
+    - script:
+        name: build externals
+        code: |
+          ./.wercker/build_externals.sh
     - script:
         name: build
         code: |
-          python3 setup.py bdist_wheel
+          /usr/local/python-3.5/bin/python setup.py bdist_wheel
+          /usr/local/python-3.6/bin/python setup.py bdist_wheel
           cp build/lib.*/pyemoji.*.so .
     - script:
         name: test
