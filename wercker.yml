@@ -30,7 +30,7 @@ build:
         name: build
         code: |
           python3 setup.py bdist_wheel
-          cp build/lib.*/emoji.*.so .
+          cp build/lib.*/pyemoji.*.so .
     - script:
         name: test
         code: |
