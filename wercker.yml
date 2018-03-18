@@ -1,5 +1,5 @@
-box: python:3.6.4-stretch
 build:
+  box: python:3.6.4-stretch
   steps:
     - script:
         name: remove python3 symlinks
