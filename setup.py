@@ -59,7 +59,9 @@ def main():
         classifiers=[
             'Development Status :: 3 - Alpha',
             'License :: OSI Approved :: MIT License',
-            'Programming Language :: Python :: 3.6'
+            'Programming Language :: Python :: 3 :: Only',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
         ],
         setup_requires=['pytest-runner'],
         tests_require=['pytest'],

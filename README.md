@@ -48,7 +48,16 @@ data = pyemoji.generate(text="絵文\n字。", width=128, height=128)
 ### Test
 
 ```
+$ python setup.py build
+$ cp build/lib.*/pyemoji.*.so .
 $ python setup.py test
+```
+
+### Create wheel package
+
+```
+$ pip install wheel --upgrade
+$ python setup.py bdist_wheel
 ```
 
 ## License

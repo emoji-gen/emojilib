@@ -1,44 +1,20 @@
-box: python:3.6.4-stretch
 build:
+  box: emojigen/docker-pyemoji
   steps:
-    - script:
-        name: remove python3 symlinks
-        code: |
-          cd /usr/local/bin
-          rm -f idle
-          rm -f pydoc
-          rm -f python
-          rm -f python-config
     - install-packages:
-      packages: git cmake g++ python libfontconfig1-dev libx11-dev libxcomposite-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev ruby
-    - script:
-        name: setup git submodule
-        code: |
-          git submodule update --init --recursive
-    - script:
-        name: build externals
-        code: |
-          cd externals/libemoji
-          cmake .
-          make
+      packages: ruby
     - script:
         name: install dependencies
         code: |
-          python3 -m pip install -r requirements-dev.txt
-          gem install gemfury --no-document
+          ./.wercker/install.sh
     - script:
-        name: build
+        name: build externals
         code: |
-          python3 setup.py bdist_wheel
-          cp build/lib.*/pyemoji.*.so .
+          ./.wercker/build_externals.sh
     - script:
-        name: test
+        name: run
         code: |
-          python3 setup.py test
-    - script:
-        name: publish
-        code: |
-          python3 scripts/publish.py
+          ./.wercker/run.sh
     - script:
         name: output dummy file
         code: |
@@ -49,4 +25,3 @@ build:
     - wantedly/pretty-slack-notify:
         webhook_url: $SLACK_WEBHOOK_URL
         channel: emoji
-
