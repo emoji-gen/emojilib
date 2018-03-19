@@ -67,7 +67,7 @@ def find_wheel_path(version):
     paths = Path(__file__) \
         .resolve().parents[1].joinpath('dist') \
         .glob('*-{}-*.whl'.format(version))
-    return list(paths)[0]
+    return str(list(paths)[0])
 
 
 def push_to_gemfary(wheel_path):
