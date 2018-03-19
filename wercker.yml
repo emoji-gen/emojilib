@@ -12,17 +12,9 @@ build:
         code: |
           ./.wercker/build_externals.sh
     - script:
-        name: build
+        name: run
         code: |
           ./.wercker/run.sh
-    - script:
-        name: test
-        code: |
-          python3 setup.py test
-    - script:
-        name: publish
-        code: |
-          python3 scripts/publish.py
     - script:
         name: output dummy file
         code: |
