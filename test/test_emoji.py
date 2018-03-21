@@ -86,6 +86,18 @@ def test_generate_kwargs_align():
         generate(align='unknown', **kwargs)
 
 
+def test_generate_kwargs_size_fixed():
+    kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(size_fixed=True, **kwargs), bytes)
+    assert isinstance(generate(size_fixed=1, **kwargs), bytes)
+    assert isinstance(generate(size_fixed='a', **kwargs), bytes)
+    assert isinstance(generate(size_fixed=False, **kwargs), bytes)
+    assert isinstance(generate(size_fixed=0, **kwargs), bytes)
+    assert isinstance(generate(size_fixed='', **kwargs), bytes)
+
+
 def test_generate_kwargs_format():
     kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
 
