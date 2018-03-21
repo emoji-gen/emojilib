@@ -98,6 +98,18 @@ def test_generate_kwargs_size_fixed():
     assert isinstance(generate(size_fixed='', **kwargs), bytes)
 
 
+def test_generate_kwargs_disable_stretch():
+    kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(disable_stretch=True, **kwargs), bytes)
+    assert isinstance(generate(disable_stretch=1, **kwargs), bytes)
+    assert isinstance(generate(disable_stretch='a', **kwargs), bytes)
+    assert isinstance(generate(disable_stretch=False, **kwargs), bytes)
+    assert isinstance(generate(disable_stretch=0, **kwargs), bytes)
+    assert isinstance(generate(disable_stretch='', **kwargs), bytes)
+
+
 def test_generate_kwargs_format():
     kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
 
