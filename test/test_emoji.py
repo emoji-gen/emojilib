@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 
+import sys
 import pytest
 from pathlib import Path
 
@@ -128,6 +129,21 @@ def test_generate_kwargs_typeface_file():
         generate(typeface_file=1, **kwargs)
     with pytest.raises(ValueError):
         generate(typeface_file='', **kwargs)
+
+
+def test_generate_kwargs_typeface_name():
+    kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+    typeface_name = 'Roboto' if sys.platform.startswith('linux') else 'Helvetica'
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(typeface_name=typeface_name, **kwargs), bytes)
+
+    with pytest.raises(TypeError):
+        generate(typeface_name=None, **kwargs)
+    with pytest.raises(TypeError):
+        generate(typeface_name=1, **kwargs)
+    with pytest.raises(ValueError):
+        generate(typeface_name='', **kwargs)
 
 
 def test_generate_kwargs_format():
