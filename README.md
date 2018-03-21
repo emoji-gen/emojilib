@@ -25,7 +25,9 @@ import emojilib
 
 def main():
     data = emojilib.generate(text="絵文\n字。", width=128, height=128)
-    // TODO
+
+    with open('emoji.png') as f:
+        f.write(data)
 
 if __name__ == '__main__':
     main()
