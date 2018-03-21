@@ -1,4 +1,4 @@
-# emojilib &nbsp;[![Build Status](https://travis-ci.org/emoji-gen/emojilib.svg?branch=master)](https://travis-ci.org/emoji-gen/emojilib) [![wercker status](https://app.wercker.com/status/290fdb66111b86139911b59a84332720/s/master "wercker status")](https://app.wercker.com/project/byKey/290fdb66111b86139911b59a84332720)
+# emojilib &nbsp;[![Build Status](https://travis-ci.org/emoji-gen/emojilib.svg?branch=master)](https://travis-ci.org/emoji-gen/emojilib) [![wercker status](https://app.wercker.com/status/486fa62cf2efbf47c595632b1e902e58/s/master "wercker status")](https://app.wercker.com/project/byKey/486fa62cf2efbf47c595632b1e902e58)
 
 :books: Ultimate Emoji Generator library for Python
 
