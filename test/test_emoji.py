@@ -90,6 +90,7 @@ def test_generate_kwargs_size_fixed():
     kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
 
     assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(size_fixed=None, **kwargs), bytes)
     assert isinstance(generate(size_fixed=True, **kwargs), bytes)
     assert isinstance(generate(size_fixed=1, **kwargs), bytes)
     assert isinstance(generate(size_fixed='a', **kwargs), bytes)
@@ -102,6 +103,7 @@ def test_generate_kwargs_disable_stretch():
     kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
 
     assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(disable_stretch=None, **kwargs), bytes)
     assert isinstance(generate(disable_stretch=True, **kwargs), bytes)
     assert isinstance(generate(disable_stretch=1, **kwargs), bytes)
     assert isinstance(generate(disable_stretch='a', **kwargs), bytes)
@@ -129,3 +131,22 @@ def test_generate_kwargs_format():
         generate(format='', **kwargs)
     with pytest.raises(ValueError):
         generate(format='unknown', **kwargs)
+
+
+def test_generate_kwargs_quality():
+    kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(quality=0, **kwargs), bytes)
+    assert isinstance(generate(quality=1, **kwargs), bytes)
+    assert isinstance(generate(quality=99, **kwargs), bytes)
+    assert isinstance(generate(quality=100, **kwargs), bytes)
+
+    with pytest.raises(TypeError):
+        generate(quality=None, **kwargs)
+    with pytest.raises(TypeError):
+        generate(quality='', **kwargs)
+    with pytest.raises(ValueError):
+        generate(quality=-1, **kwargs)
+    with pytest.raises(ValueError):
+        generate(quality=101, **kwargs)
