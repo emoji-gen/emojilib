@@ -69,6 +69,8 @@ typedef struct {
     const char* color;
     const char* background_color;
     const char* align;
+    bool size_fixed;
+    bool disable_stretch;
     const char* typeface_file;
     const char* typeface_name;
     const char* format;
@@ -82,6 +84,8 @@ static void init_params(GenerateParams *params) {
     params->color = "#000000FF";
     params->background_color = "#00000000";
     params->align = "center";
+    params->size_fixed = false;
+    params->disable_stretch = false;
     params->typeface_file = NULL;
     params->typeface_name = NULL;
     params->format = "png";
@@ -96,6 +100,8 @@ static bool parse_params(PyObject* args, PyObject *kwargs, GenerateParams* param
         "color",
         "background_color",
         "align",
+        "size_fixed",
+        "disable_stretch",
         "typeface_file",
         "typeface_name",
         "format",
@@ -106,7 +112,7 @@ static bool parse_params(PyObject* args, PyObject *kwargs, GenerateParams* param
     if (!PyArg_ParseTupleAndKeywords(
             args,
             kwargs,
-            "|siissssssi",
+            "|siisssppsssi",
             kwlist,
             &params->text,
             &params->width,
@@ -114,6 +120,8 @@ static bool parse_params(PyObject* args, PyObject *kwargs, GenerateParams* param
             &params->color,
             &params->background_color,
             &params->align,
+            &params->size_fixed,
+            &params->disable_stretch,
             &params->typeface_file,
             &params->typeface_name,
             &params->format,
@@ -181,6 +189,8 @@ static bool convert_params(GenerateParams* in_params, EgGenerateParams *params) 
     params->fColor = color;
     params->fBackgroundColor = background_color;
     params->fTextAlign = align;
+    params->fTextSizeFixed = in_params->size_fixed;
+    params->fDisableStretch = in_params->disable_stretch;
     params->fTypefaceFile = in_params->typeface_file;
     params->fTypefaceName = in_params->typeface_name;
     params->fFormat = format;
