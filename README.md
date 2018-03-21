@@ -55,9 +55,15 @@ $ python setup.py build
 ```
 
 ## Development
+### Test requirements
+
+- Git LFS
+
 ### Test
 
 ```
+$ git lfs pull
+$ pip install -r requirements-dev.txt
 $ python setup.py build install test
 ```
 
