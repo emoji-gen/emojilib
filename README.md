@@ -38,19 +38,21 @@ $ python setup.py build
 ## Example
 
 ```python
-import pyemoji
+import emojilib
 
-data = pyemoji.generate(text="絵文\n字。", width=128, height=128)
+def main():
+    data = emojilib.generate(text="絵文\n字。", width=128, height=128)
+    // TODO
 
+if __name__ == '__main__':
+    main()
 ```
 
 ## Development
 ### Test
 
 ```
-$ python setup.py build
-$ cp build/lib.*/pyemoji.*.so .
-$ python setup.py test
+$ python setup.py build install test
 ```
 
 ### Create wheel package
