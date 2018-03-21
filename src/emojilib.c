@@ -76,7 +76,7 @@ typedef struct {
 } GenerateParams;
 
 static void init_params(GenerateParams *params) {
-    params->text = "";
+    params->text = "ab\nc.";
     params->width = 128;
     params->height = 128;
     params->color = "#000000FF";
@@ -132,6 +132,11 @@ static bool convert_params(GenerateParams* in_params, EgGenerateParams *params) 
     EgFormat format;
 
     // Validation
+    if (in_params->text == NULL || strlen(in_params->text) == 0) {
+        PyErr_SetString(PyExc_ValueError, "invalid `text` format");
+        return false;
+    }
+
     if (in_params->width <= 0) {
         PyErr_SetString(PyExc_ValueError, "invalid `width` format");
         return false;
