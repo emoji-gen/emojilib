@@ -179,14 +179,14 @@ static PyMethodDef EmojiMethods[] = {
 
 static struct PyModuleDef module = {
     PyModuleDef_HEAD_INIT,
-    "pyemoji",
+    "emojilib",
     NULL,
     -1,
     EmojiMethods
 };
 
 PyMODINIT_FUNC
-PyInit_pyemoji(void)
+PyInit_emojilib(void)
 {
     PyObject *m;
 
