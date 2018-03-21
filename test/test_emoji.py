@@ -58,6 +58,14 @@ def test_generate_kwargs_color():
     assert isinstance(generate(color='#FFFFFFFF', **kwargs), bytes)
 
 
+def test_generate_kwargs_background_color():
+    kwargs = { 'text': "a", 'width': 16, 'height': 16 }
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(background_color='FFFFFFFF', **kwargs), bytes)
+    assert isinstance(generate(background_color='#FFFFFFFF', **kwargs), bytes)
+
+
 def test_generate_kwargs_align():
     kwargs = { 'text': "a", 'width': 16, 'height': 16 }
 
