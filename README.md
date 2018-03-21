@@ -12,6 +12,25 @@
 - macOS 10.12 Sierra
 - Debian 9 Stretch
 
+## Getting started
+
+```
+$ pip install emojilib --extra-index-url https://repo.fury.io/emoji-gen/
+```
+
+## Example
+
+```python
+import emojilib
+
+def main():
+    data = emojilib.generate(text="絵文\n字。", width=128, height=128)
+    // TODO
+
+if __name__ == '__main__':
+    main()
+```
+
 ## How to build
 ### 1. Compile libemoji
 First, please build externals.
@@ -33,19 +52,6 @@ $ . venv/bin/activate
 ### 3. Run build command
 ```
 $ python setup.py build
-```
-
-## Example
-
-```python
-import emojilib
-
-def main():
-    data = emojilib.generate(text="絵文\n字。", width=128, height=128)
-    // TODO
-
-if __name__ == '__main__':
-    main()
 ```
 
 ## Development
