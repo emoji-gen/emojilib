@@ -112,6 +112,20 @@ def test_generate_kwargs_disable_stretch():
     assert isinstance(generate(disable_stretch='', **kwargs), bytes)
 
 
+def test_generate_kwargs_typeface_file():
+    kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(typeface_file='/XXXXXXXXXXX/X/XXX.ttf', **kwargs), bytes)
+
+    with pytest.raises(TypeError):
+        generate(typeface_file=None, **kwargs)
+    with pytest.raises(TypeError):
+        generate(typeface_file=1, **kwargs)
+    with pytest.raises(ValueError):
+        generate(typeface_file='', **kwargs)
+
+
 def test_generate_kwargs_format():
     kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
 

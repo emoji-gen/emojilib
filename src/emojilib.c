@@ -170,6 +170,16 @@ static bool convert_params(GenerateParams* in_params, EgGenerateParams *params) 
         return false;
     }
 
+    if (in_params->typeface_file != NULL && strlen(in_params->typeface_file) == 0) {
+        PyErr_SetString(PyExc_ValueError, "invalid `typeface_file` value");
+        return false;
+    }
+
+    if (in_params->typeface_name != NULL && strlen(in_params->typeface_name) == 0) {
+        PyErr_SetString(PyExc_ValueError, "invalid `typeface_name` value");
+        return false;
+    }
+
     if (!convert_to_format(in_params->format, &format)) {
         PyErr_SetString(PyExc_ValueError, "`format` should be one of \"png\" or \"webp\"");
         return false;
