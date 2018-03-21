@@ -1,4 +1,4 @@
-# pyemoji &nbsp;[![Build Status](https://travis-ci.org/emoji-gen/pyemoji.svg?branch=master)](https://travis-ci.org/emoji-gen/pyemoji) [![wercker status](https://app.wercker.com/status/290fdb66111b86139911b59a84332720/s/master "wercker status")](https://app.wercker.com/project/byKey/290fdb66111b86139911b59a84332720)
+# pyemoji &nbsp;[![Build Status](https://travis-ci.org/emoji-gen/emojilib.svg?branch=master)](https://travis-ci.org/emoji-gen/emojilib) [![wercker status](https://app.wercker.com/status/290fdb66111b86139911b59a84332720/s/master "wercker status")](https://app.wercker.com/project/byKey/290fdb66111b86139911b59a84332720)
 
 :books: Ultimate Emoji Generator library for Python
 
