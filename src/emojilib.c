@@ -62,6 +62,130 @@ static bool convert_to_format(const char* format_string, EgFormat* format) {
 
 // --------------------------------------------------------------------------------------
 
+typedef struct {
+    const char* text;
+    int width;
+    int height;
+    const char* color;
+    const char* background_color;
+    const char* align;
+    const char* typeface_file;
+    const char* typeface_name;
+    const char* format;
+    int quality;
+} GenerateParams;
+
+static void init_params(GenerateParams *params) {
+    params->text = "";
+    params->width = 128;
+    params->height = 128;
+    params->color = "#000000FF";
+    params->background_color = "#00000000";
+    params->align = "center";
+    params->typeface_file = NULL;
+    params->typeface_name = NULL;
+    params->format = "png";
+    params->quality = 100;
+}
+
+static bool parse_params(PyObject* args, PyObject *kwargs, GenerateParams* params) {
+    static char *kwlist[] = {
+        "text",
+        "width",
+        "height",
+        "color",
+        "background_color",
+        "align",
+        "typeface_file",
+        "typeface_name",
+        "format",
+        "quality",
+        NULL
+    };
+
+    if (!PyArg_ParseTupleAndKeywords(
+            args,
+            kwargs,
+            "|siissssssi",
+            kwlist,
+            &params->text,
+            &params->width,
+            &params->height,
+            &params->color,
+            &params->background_color,
+            &params->align,
+            &params->typeface_file,
+            &params->typeface_name,
+            &params->format,
+            &params->quality))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+static bool convert_params(GenerateParams* in_params, EgGenerateParams *params) {
+    uint32_t color;
+    uint32_t background_color;
+    EgAlign align;
+    EgFormat format;
+
+    // バリデーション
+    if (in_params->width <= 0) {
+        PyErr_SetString(PyExc_ValueError, "invalid `width` format");
+        return false;
+    }
+
+    if (in_params->height <= 0) {
+        PyErr_SetString(PyExc_ValueError, "invalid `height` format");
+        return false;
+    }
+
+    if (!convert_to_color(in_params->color, &color)) {
+        PyErr_SetString(PyExc_ValueError, "invalid `color` format");
+        return false;
+    }
+
+    if (!convert_to_color(in_params->background_color, &background_color)) {
+        PyErr_SetString(PyExc_ValueError, "invalid `background_color` format");
+        return false;
+    }
+
+    if (!convert_to_align(in_params->align, &align)) {
+        PyErr_SetString(PyExc_ValueError, "`align` should be one of \"left\", \"center\" or \"right\"");
+        return false;
+    }
+
+    if (!convert_to_format(in_params->format, &format)) {
+        PyErr_SetString(PyExc_ValueError, "`format` should be one of \"png\" or \"webp\"");
+        return false;
+    }
+
+    if (in_params->quality < 0 || in_params->quality > 100) {
+        PyErr_SetString(PyExc_ValueError, "`quality` should be above 0 and bellow 100");
+        return false;
+    }
+
+
+    // パラメーター生成
+    memset(params, 0, sizeof(EgGenerateParams));
+    params->fText = in_params->text;
+    params->fWidth = in_params->width;
+    params->fHeight = in_params->height;
+    params->fColor = color;
+    params->fBackgroundColor = background_color;
+    params->fTextAlign = align;
+    params->fTypefaceFile = in_params->typeface_file;
+    params->fTypefaceName = in_params->typeface_name;
+    params->fFormat = format;
+    params->fQuality = in_params->quality;
+
+    return true;
+}
+
+// --------------------------------------------------------------------------------------
+
 static PyObject* EmojiError;
 
 static PyObject* pyemoji_generate(
@@ -70,88 +194,13 @@ static PyObject* pyemoji_generate(
     PyObject *kwargs
     )
 {
-    const char* text = "";
-    int width = 128;
-    int height = 128;
-    const char* color_string = "#000000FF";
-    const char* background_color_string = "#00000000";
-    const char* typeface_name = NULL;
-    const char* align_string = "center";
-    const char* format_string = "png";
-    int quality = 100;
-
-    static char *kwlist[] = {
-        "text",
-        "width",
-        "height",
-        "color",
-        "background_color",
-        "align",
-        "typeface_name",
-        "format",
-        "quality",
-        NULL
-    };
-
-    // バリデーション
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|siisssssi", kwlist,
-            &text, &width, &height, &color_string, &background_color_string,
-            &align_string, &typeface_name, &format_string, &quality))
-    {
-        return NULL;
-    }
-
-    if (width <= 0) {
-        PyErr_SetString(PyExc_ValueError, "invalid `width` format");
-        return NULL;
-    }
-
-    if (height <= 0) {
-        PyErr_SetString(PyExc_ValueError, "invalid height format");
-        return NULL;
-    }
-
-    uint32_t color;
-    if (!convert_to_color(color_string, &color)) {
-        PyErr_SetString(PyExc_ValueError, "invalid color format");
-        return NULL;
-    }
-
-    uint32_t background_color;;
-    if (!convert_to_color(background_color_string, &background_color)) {
-        PyErr_SetString(PyExc_ValueError, "invalid color format");
-        return NULL;
-    }
-
-    EgAlign align;
-    if (!convert_to_align(align_string, &align)) {
-        PyErr_SetString(PyExc_ValueError, "`align` should be one of \"Left\", \"Center\" or \"Right\"");
-        return NULL;
-    }
-
-    EgFormat format;
-    if (!convert_to_format(format_string, &format)) {
-        PyErr_SetString(PyExc_ValueError, "`format` should be one of \"PNG\" or \"WEBP\"");
-        return NULL;
-    }
-
-    if (quality < 0 || quality > 100) {
-        PyErr_SetString(PyExc_ValueError, "`quality` should be above 0 and bellow 100");
-        return NULL;
-    }
-
     // パラメーター生成
+    GenerateParams in_params;
     EgGenerateParams params;
-    memset(&params, 0, sizeof(params));
-    params.fText = text;
-    params.fWidth = width;
-    params.fHeight = height;
-    params.fColor = color;
-    params.fBackgroundColor = background_color;
-    params.fTextAlign = align;
-    params.fTypefaceName = typeface_name;
-    params.fFormat = format;
-    params.fQuality = quality;
+
+    init_params(&in_params);
+    if (!parse_params(args, kwargs, &in_params)) return NULL;
+    if (!convert_params(&in_params, &params)) return NULL;
 
     // 生成
     EgGenerateResult result;
