@@ -39,7 +39,7 @@ elif sys.platform.startswith('linux'):
 def main():
     module = Extension(
         'emojilib',
-        sources=['src/pyemoji.c'],
+        sources=['src/emojilib.c'],
         include_dirs=['include'],
         extra_objects=extra_objects,
         libraries=libraries,
