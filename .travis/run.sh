@@ -11,12 +11,8 @@ eval "$(pyenv init -)"
 VIRTUAL_ENV_DISABLE_PROMPT=true
 source .venv/bin/activate
 
-# build
-python setup.py bdist_wheel
-cp build/lib.*/pyemoji.*.so .
-
-# test
-python setup.py test
+# build & test
+python setup.py bdist_wheel install test
 
 # release
 python ./scripts/publish.py
