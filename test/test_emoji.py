@@ -5,6 +5,7 @@ from emojilib import generate
 
 def test_generate_kwargs_color():
     kwargs = { 'text': "a", 'width': 16, 'height': 16 }
+
     assert isinstance(generate(**kwargs), bytes)
     assert isinstance(generate(color='FFFFFFFF', **kwargs), bytes)
     assert isinstance(generate(color='#FFFFFFFF', **kwargs), bytes)
@@ -12,6 +13,7 @@ def test_generate_kwargs_color():
 
 def test_generate_kwargs_align():
     kwargs = { 'text': "a", 'width': 16, 'height': 16 }
+
     assert isinstance(generate(**kwargs), bytes)
     assert isinstance(generate(align='left', **kwargs), bytes)
     assert isinstance(generate(align='Left', **kwargs), bytes)
@@ -21,19 +23,17 @@ def test_generate_kwargs_align():
 
     with pytest.raises(TypeError):
         generate(align=None, **kwargs)
-
     with pytest.raises(TypeError):
         generate(align=1, **kwargs)
-
     with pytest.raises(ValueError):
         generate(align='', **kwargs)
-
     with pytest.raises(ValueError):
         generate(align='unknown', **kwargs)
 
 
 def test_generate_kwargs_format():
     kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+
     assert isinstance(generate(**kwargs), bytes)
     assert isinstance(generate(format='png', **kwargs), bytes)
     assert isinstance(generate(format='Png', **kwargs), bytes)
@@ -44,12 +44,9 @@ def test_generate_kwargs_format():
 
     with pytest.raises(TypeError):
         generate(format=None, **kwargs)
-
     with pytest.raises(TypeError):
         generate(format=1, **kwargs)
-
     with pytest.raises(ValueError):
         generate(format='', **kwargs)
-
     with pytest.raises(ValueError):
         generate(format='unknown', **kwargs)
