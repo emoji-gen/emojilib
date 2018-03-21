@@ -1,6 +1,8 @@
 # -*- encoding: utf-8 -*-
 
 import pytest
+from pathlib import Path
+
 from emojilib import generate
 
 
@@ -114,9 +116,11 @@ def test_generate_kwargs_disable_stretch():
 
 def test_generate_kwargs_typeface_file():
     kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+    typeface_file = Path(__file__) \
+        .resolve().parents[1].joinpath('assets', 'Roboto-Regular.ttf')
 
     assert isinstance(generate(**kwargs), bytes)
-    assert isinstance(generate(typeface_file='/XXXXXXXXXXX/X/XXX.ttf', **kwargs), bytes)
+    assert isinstance(generate(typeface_file=str(typeface_file), **kwargs), bytes)
 
     with pytest.raises(TypeError):
         generate(typeface_file=None, **kwargs)
