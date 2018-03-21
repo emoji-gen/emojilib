@@ -101,6 +101,11 @@ static PyObject* pyemoji_generate(
         return NULL;
     }
 
+    if (height <= 0) {
+        PyErr_SetString(PyExc_ValueError, "invalid height format");
+        return NULL;
+    }
+
     uint32_t color;
     if (!convert_to_color(color_string, &color)) {
         PyErr_SetString(PyExc_ValueError, "invalid color format");

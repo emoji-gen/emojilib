@@ -3,6 +3,23 @@
 import pytest
 from emojilib import generate
 
+
+def test_generate_kwargs_height():
+    kwargs = { 'text': 'a', 'width': 16 }
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(height=128, **kwargs), bytes)
+
+    with pytest.raises(TypeError):
+        generate(height=None, **kwargs)
+    with pytest.raises(TypeError):
+        generate(height='', **kwargs)
+    with pytest.raises(ValueError):
+        generate(height=-1, **kwargs)
+    with pytest.raises(ValueError):
+        generate(height=0, **kwargs)
+
+
 def test_generate_kwargs_color():
     kwargs = { 'text': "a", 'width': 16, 'height': 16 }
 
