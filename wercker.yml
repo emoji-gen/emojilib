@@ -1,8 +1,6 @@
 build:
   box: emojigen/docker-pyemoji
   steps:
-    - install-packages:
-      packages: ruby
     - script:
         name: install dependencies
         code: |
