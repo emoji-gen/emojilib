@@ -204,7 +204,7 @@ PyInit_emojilib(void)
     if (m == NULL)
         return NULL;
 
-    EmojiError = PyErr_NewException("pyemoji.error", NULL, NULL);
+    EmojiError = PyErr_NewException("emojilib.error", NULL, NULL);
     Py_INCREF(EmojiError);
     PyModule_AddObject(m, "error", EmojiError);
 
