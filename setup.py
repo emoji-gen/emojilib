@@ -38,7 +38,7 @@ elif sys.platform.startswith('linux'):
 
 def main():
     module = Extension(
-        'pyemoji',
+        'emojilib',
         sources=['src/pyemoji.c'],
         include_dirs=['include'],
         extra_objects=extra_objects,
@@ -49,7 +49,7 @@ def main():
     )
 
     setup(
-        name='pyemoji',
+        name='emojilib',
         version=VERSION,
         description='Ultimate Emoji Generator library using Skia and Python C Extension',
         url='https://github.com/emoji-gen/emojilib',

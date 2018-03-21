@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 import pytest
-from pyemoji import generate
+from emojilib import generate
 
 def test_generate_kwargs_color():
     kwargs = { 'text': "a", 'width': 16, 'height': 16 }
