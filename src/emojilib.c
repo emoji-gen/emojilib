@@ -131,7 +131,7 @@ static bool convert_params(GenerateParams* in_params, EgGenerateParams *params) 
     EgAlign align;
     EgFormat format;
 
-    // バリデーション
+    // Validation
     if (in_params->width <= 0) {
         PyErr_SetString(PyExc_ValueError, "invalid `width` format");
         return false;
@@ -168,7 +168,7 @@ static bool convert_params(GenerateParams* in_params, EgGenerateParams *params) 
     }
 
 
-    // パラメーター生成
+    // Copy parameters
     memset(params, 0, sizeof(EgGenerateParams));
     params->fText = in_params->text;
     params->fWidth = in_params->width;
