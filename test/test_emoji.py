@@ -20,13 +20,36 @@ def test_generate_kwargs_align():
     assert isinstance(generate(align='right', **kwargs), bytes)
 
     with pytest.raises(TypeError):
-        generate(align=None)
+        generate(align=None, **kwargs)
 
     with pytest.raises(TypeError):
-        generate(align=1)
+        generate(align=1, **kwargs)
 
     with pytest.raises(ValueError):
-        generate(align='')
+        generate(align='', **kwargs)
 
     with pytest.raises(ValueError):
-        generate(align='unknown')
+        generate(align='unknown', **kwargs)
+
+
+def test_generate_kwargs_format():
+    kwargs = { 'text': 'a', 'width': 16, 'height': 16 }
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(format='png', **kwargs), bytes)
+    assert isinstance(generate(format='Png', **kwargs), bytes)
+    assert isinstance(generate(format='PNG', **kwargs), bytes)
+    assert isinstance(generate(format='webp', **kwargs), bytes)
+    assert isinstance(generate(format='Webp', **kwargs), bytes)
+    assert isinstance(generate(format='WEBP', **kwargs), bytes)
+
+    with pytest.raises(TypeError):
+        generate(format=None, **kwargs)
+
+    with pytest.raises(TypeError):
+        generate(format=1, **kwargs)
+
+    with pytest.raises(ValueError):
+        generate(format='', **kwargs)
+
+    with pytest.raises(ValueError):
+        generate(format='unknown', **kwargs)

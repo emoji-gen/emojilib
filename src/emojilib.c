@@ -94,7 +94,7 @@ static PyObject* pyemoji_generate(
     };
 
     // バリデーション
-    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|siissssi", kwlist,
+    if (!PyArg_ParseTupleAndKeywords(args, kwargs, "|siisssssi", kwlist,
             &text, &width, &height, &color_string, &background_color_string,
             &align_string, &typeface_name, &format_string, &quality))
     {
