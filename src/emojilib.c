@@ -101,6 +101,11 @@ static PyObject* pyemoji_generate(
         return NULL;
     }
 
+    if (width <= 0) {
+        PyErr_SetString(PyExc_ValueError, "invalid `width` format");
+        return NULL;
+    }
+
     if (height <= 0) {
         PyErr_SetString(PyExc_ValueError, "invalid height format");
         return NULL;
