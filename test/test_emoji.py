@@ -4,6 +4,20 @@ import pytest
 from emojilib import generate
 
 
+def test_generate_kwargs_text():
+    kwargs = { 'width': 16, 'height': 16 }
+
+    assert isinstance(generate(**kwargs), bytes)
+    assert isinstance(generate(text='a', **kwargs), bytes)
+
+    with pytest.raises(TypeError):
+        generate(text=None, **kwargs)
+    with pytest.raises(TypeError):
+        generate(text=0, **kwargs)
+    with pytest.raises(ValueError):
+        generate(text='', **kwargs)
+
+
 def test_generate_kwargs_width():
     kwargs = { 'text': 'a', 'height': 16 }
 
