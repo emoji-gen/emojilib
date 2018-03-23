@@ -11,7 +11,7 @@
 static bool convert_to_color(const char* color_string, uint32_t* color) {
     if (color_string == NULL) return false;
 
-    int length = strlen(color_string);
+    size_t length = strlen(color_string);
     if (length == 0) return false;
 
     unsigned pos = *color_string == '#' ? 1 : 0;
