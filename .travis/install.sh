@@ -2,6 +2,11 @@
 
 set -eux
 
+# install lfs
+brew install git-lfs
+git lfs install
+git lfs pull
+
 # install pyenv
 git clone --depth 1 https://github.com/pyenv/pyenv ~/.pyenv
 PYENV_ROOT="$HOME/.pyenv"
