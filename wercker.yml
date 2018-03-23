@@ -8,7 +8,6 @@ build:
     - script:
         name: build externals
         code: |
-          ls -l /usr/lib/x86_64-linux-gnu/ | grep libstd
           ./.wercker/build_externals.sh
     - script:
         name: run
