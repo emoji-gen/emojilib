@@ -11,10 +11,10 @@ git lfs install
 git lfs pull
 
 # install python
-mkdir -p /usr/local
-git clone https://github.com/tagomoris/xbuild.git /usr/local/xbuild
-/usr/local/xbuild/python-install -f $PYTHON_35_VERSION /usr/local/python-3.5
-/usr/local/xbuild/python-install -f $PYTHON_36_VERSION /usr/local/python-3.6
+mkdir -p ~/local
+git clone https://github.com/tagomoris/xbuild.git ~/local/xbuild
+~/local/xbuild/python-install -f $PYTHON_35_VERSION ~/local/python-3.5
+~/local/xbuild/python-install -f $PYTHON_36_VERSION ~/local/python-3.6
 
 git clone --depth 1 https://github.com/pyenv/pyenv ~/.pyenv
 PYENV_ROOT="$HOME/.pyenv"
