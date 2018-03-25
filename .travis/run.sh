@@ -2,17 +2,11 @@
 
 set -eux
 
-# setup pyenv
-PYENV_ROOT="$HOME/.pyenv"
-PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+~/local/python-3.5/bin/python setup.py bdist_wheel install test
+~/local/python-3.5/bin/python ./scripts/publish.py
 
-# setup venv
-VIRTUAL_ENV_DISABLE_PROMPT=true
-source .venv/bin/activate
+./scripts/clean.sh
 
-# build & test
-python setup.py bdist_wheel install test
+~/local/python-3.6/bin/python setup.py bdist_wheel install test
+~/local/python-3.6/bin/python ./scripts/publish.py
 
-# release
-python ./scripts/publish.py
