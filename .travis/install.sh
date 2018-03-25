@@ -19,4 +19,6 @@ git clone https://github.com/tagomoris/xbuild.git ~/local/xbuild
 # install requirements
 ~/local/python-3.5/bin/pip3 install -r requirements-dev.txt
 ~/local/python-3.6/bin/pip3 install -r requirements-dev.txt
+~/local/python-3.5/bin/pip3 install --upgrade wheel
+~/local/python-3.6/bin/pip3 install --upgrade wheel
 gem install gemfury --no-document
