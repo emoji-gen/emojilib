@@ -1,5 +1,5 @@
 build:
-  box: emojigen/docker-pyemoji
+  box: emojigen/docker-emojilib
   steps:
     - script:
         name: install dependencies
