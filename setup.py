@@ -9,7 +9,6 @@ VERSION = '0.1.3'
 
 extra_objects = [
     'lib/libemoji.a',
-    'lib/libskia.a',
 ]
 extra_compile_args = [
     '-std=c11',
