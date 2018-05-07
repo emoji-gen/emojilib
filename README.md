@@ -77,4 +77,4 @@ $ python setup.py bdist_wheel
 ```
 
 ## License
-MIT &copy; Emoji Generator
+MIT &copy; [Emoji Generator](https://emoji-gen.ninja)
