@@ -4,7 +4,7 @@
 
 ## System requirements
 
-- Python 3.5.x or later
+- Python 3.5 and 3.6
 - C11 Compiler
 
 ## Official supported platforms
