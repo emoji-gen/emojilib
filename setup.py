@@ -4,7 +4,7 @@
 import sys
 from setuptools import setup, Extension
 
-VERSION = '0.1.4'
+VERSION = '0.1.5'
 
 
 extra_objects = [
