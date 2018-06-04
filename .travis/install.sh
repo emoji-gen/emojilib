@@ -3,7 +3,7 @@
 set -eux
 
 PYTHON_35_VERSION=3.5.5
-PYTHON_36_VERSION=3.6.4
+PYTHON_36_VERSION=3.6.5
 
 # install lfs
 brew install git-lfs
