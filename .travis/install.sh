@@ -17,12 +17,15 @@ git clone https://github.com/tagomoris/xbuild.git ~/local/xbuild
 ~/local/xbuild/python-install -f $PYTHON_35_VERSION ~/local/python-3.5
 ~/local/xbuild/python-install -f $PYTHON_36_VERSION ~/local/python-3.6
 ~/local/xbuild/python-install -f $PYTHON_37_VERSION ~/local/python-3.7
+~/local/python-3.5/bin/pip3 install --upgrade pip
+~/local/python-3.6/bin/pip3 install --upgrade pip
+~/local/python-3.7/bin/pip3 install --upgrade pip
+~/local/python-3.5/bin/pip3 install --upgrade wheel
+~/local/python-3.6/bin/pip3 install --upgrade wheel
+~/local/python-3.7/bin/pip3 install --upgrade wheel
 
 # install requirements
 ~/local/python-3.5/bin/pip3 install -r requirements-dev.txt
 ~/local/python-3.6/bin/pip3 install -r requirements-dev.txt
 ~/local/python-3.7/bin/pip3 install -r requirements-dev.txt
-~/local/python-3.5/bin/pip3 install --upgrade wheel
-~/local/python-3.6/bin/pip3 install --upgrade wheel
-~/local/python-3.7/bin/pip3 install --upgrade wheel
 gem install gemfury --no-document
