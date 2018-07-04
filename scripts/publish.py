@@ -35,23 +35,19 @@ def find_release_version():
 
 def find_gemfary_packages():
     subprocess.run(['fury', '-v'], stdout=subprocess.PIPE, check=True)
-    try:
-        process = subprocess.run(['fury', 'list',
-            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
-    else:
-        packages = process.stdout.decode('utf-8')
-        return packages
+    process = subprocess.run(['fury', 'list',
+        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    packages = process.stdout.decode('utf-8')
+    return packages
 
 
 def find_gemfary_versions():
-    try:
-        process = subprocess.run(['fury', 'versions', PACKAGE_NAME,
-            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
-    else:
-        versions = process.stdout.decode('utf-8')
-        return versions
+    process = subprocess.run(['fury', 'versions', PACKAGE_NAME,
+        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    versions = process.stdout.decode('utf-8')
+    return versions
 
 
 def find_wheel_path(version):
