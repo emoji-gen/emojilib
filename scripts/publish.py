@@ -4,7 +4,6 @@
 import os
 import sys
 import subprocess
-from subprocess import CalledProcessError
 from importlib import machinery
 from pathlib import Path
 
@@ -40,10 +39,6 @@ def find_gemfary_packages():
         process = subprocess.run(['fury', 'list',
             '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
-    except CalledProcessError as e:
-        print(e.output)
-        raise CalledProcessError(
-            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
     else:
         packages = process.stdout.decode('utf-8')
         return packages
@@ -54,10 +49,6 @@ def find_gemfary_versions():
         process = subprocess.run(['fury', 'versions', PACKAGE_NAME,
             '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
-    except CalledProcessError as e:
-        print(e.output)
-        raise CalledProcessError(
-            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
     else:
         versions = process.stdout.decode('utf-8')
         return versions
@@ -71,14 +62,9 @@ def find_wheel_path(version):
 
 
 def push_to_gemfary(wheel_path):
-    try:
-        subprocess.run(['fury', 'push', wheel_path,
-            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
-            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
-    except CalledProcessError as e:
-        print(e.output)
-        raise CalledProcessError(
-            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
+    subprocess.run(['fury', 'push', wheel_path,
+        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
 
 
 def publish():
