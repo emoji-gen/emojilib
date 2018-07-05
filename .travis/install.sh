@@ -13,8 +13,6 @@ git lfs pull
 
 # install retry
 brew install gnu-getopt || true
-export PATH=/usr/local/opt/gnu-getopt/bin:$PATH
-
 sudo curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry
 sudo chmod +x /usr/local/bin/retry
 
