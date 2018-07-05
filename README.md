@@ -4,7 +4,7 @@
 
 ## System requirements
 
-- Python 3.5 and 3.6
+- Python 3.5, 3.6 or 3.7
 - C11 Compiler
 
 ## Official supported platforms
@@ -57,10 +57,6 @@ $ python setup.py build
 ```
 
 ## Development
-### Test requirements
-
-- Git LFS
-
 ### Test
 
 ```
