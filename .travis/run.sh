@@ -2,6 +2,8 @@
 
 set -eux
 
+PATH=/usr/local/opt/gnu-getopt/bin/getopt:$PATH
+
 # 3.5
 which retry
 retry -- ~/local/python-3.5/bin/python setup.py bdist_wheel install test
