@@ -11,6 +11,10 @@ brew install git-lfs
 git lfs install
 git lfs pull
 
+# install retry
+curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/bin/retry
+chmod +x /usr/bin/retry
+
 # install python
 mkdir -p ~/local
 git clone https://github.com/tagomoris/xbuild.git ~/local/xbuild
