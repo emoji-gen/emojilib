@@ -3,15 +3,16 @@
 set -eux
 
 # 3.5
-retry ~/local/python-3.5/bin/python setup.py bdist_wheel install test
-retry ~/local/python-3.5/bin/python ./scripts/publish.py
+which retry
+retry -- ~/local/python-3.5/bin/python setup.py bdist_wheel install test
+retry -- ~/local/python-3.5/bin/python ./scripts/publish.py
 ./scripts/clean.sh
 
 # 3.6
-retry ~/local/python-3.6/bin/python setup.py bdist_wheel install test
-retry ~/local/python-3.6/bin/python ./scripts/publish.py
+retry -- ~/local/python-3.6/bin/python setup.py bdist_wheel install test
+retry -- ~/local/python-3.6/bin/python ./scripts/publish.py
 ./scripts/clean.sh
 
 # 3.7
-retry ~/local/python-3.7/bin/python setup.py bdist_wheel install test
-retry ~/local/python-3.7/bin/python ./scripts/publish.py
+retry -- ~/local/python-3.7/bin/python setup.py bdist_wheel install test
+retry -- ~/local/python-3.7/bin/python ./scripts/publish.py
