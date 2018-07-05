@@ -12,8 +12,8 @@ git lfs install
 git lfs pull
 
 # install retry
-sudo curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/bin/retry
-sudo chmod +x /usr/bin/retry
+sudo curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry
+sudo chmod +x /usr/local/bin/retry
 
 # install python
 mkdir -p ~/local
