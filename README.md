@@ -60,7 +60,6 @@ $ python setup.py build
 ### Test
 
 ```
-$ git lfs pull
 $ pip install -r requirements-dev.txt
 $ python setup.py build install test
 ```
