@@ -2,7 +2,7 @@
 
 set -eux
 
-PATH=/usr/local/opt/gnu-getopt/bin/getopt:$PATH
+PATH=/usr/local/opt/gnu-getopt/bin:$PATH
 
 # 3.5
 which retry
