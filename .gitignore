@@ -1,3 +1,4 @@
+# Python
 /build
 /dist
 /venv
@@ -7,10 +8,15 @@ __pycache__
 *.egg-info
 .eggs
 
+# Pytest
 .pytest_cache
 
+# Cython
 *.so
 *.a
+*.c
+
+# example
 *.png
 
 
