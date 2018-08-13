@@ -3,13 +3,9 @@
 
 from cpython.bytes cimport PyBytes_FromStringAndSize
 from libc.stdint cimport uint32_t
-from libc.stdio cimport sscanf
 from libc.string cimport memset
 
 # ------------------------------------------------------------------------------
-
-cdef extern from '<stdint.h>':
-    const char* PRIx32
 
 cdef extern from 'emoji.h':
 
