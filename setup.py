@@ -2,7 +2,8 @@
 # -*- encoding: utf-8 -*-
 
 import sys
-from setuptools import setup, Extension
+from setuptools import Extension, setup
+from Cython.Build import cythonize
 
 VERSION = '0.1.7'
 
@@ -36,9 +37,9 @@ elif sys.platform.startswith('linux'):
 
 
 def main():
-    module = Extension(
+    extension = Extension(
         'emojilib',
-        sources=['src/emojilib.c'],
+        sources=['src/emojilib.pyx'],
         include_dirs=['include'],
         extra_objects=extra_objects,
         libraries=libraries,
@@ -65,7 +66,7 @@ def main():
         ],
         setup_requires=['pytest-runner'],
         tests_require=['pytest'],
-        ext_modules=[module]
+        ext_modules=cythonize([extension])
     )
 
 

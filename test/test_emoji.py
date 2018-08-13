@@ -124,8 +124,6 @@ def test_generate_kwargs_typeface_file():
     assert isinstance(generate(typeface_file=str(typeface_file), **kwargs), bytes)
 
     with pytest.raises(TypeError):
-        generate(typeface_file=None, **kwargs)
-    with pytest.raises(TypeError):
         generate(typeface_file=1, **kwargs)
     with pytest.raises(ValueError):
         generate(typeface_file='', **kwargs)
@@ -138,8 +136,6 @@ def test_generate_kwargs_typeface_name():
     assert isinstance(generate(**kwargs), bytes)
     assert isinstance(generate(typeface_name=typeface_name, **kwargs), bytes)
 
-    with pytest.raises(TypeError):
-        generate(typeface_name=None, **kwargs)
     with pytest.raises(TypeError):
         generate(typeface_name=1, **kwargs)
     with pytest.raises(ValueError):
