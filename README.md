@@ -7,10 +7,15 @@
 - Python 3.5, 3.6 or 3.7
 - C11 Compiler
 
-## Official supported platforms
+### Official supported platforms
 
 - macOS 10.12 Sierra
 - Debian 9 Stretch
+
+## Used libraries
+
+- [Cython](http://cython.org/)
+- [libemoji](https://github.com/emoji-gen/libemoji) - Ultimate Emoji Generator library for C/C++
 
 ## Getting started
 
