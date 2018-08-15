@@ -29,9 +29,9 @@ $ pip install emojilib --extra-index-url https://repo.fury.io/emoji-gen/
 import emojilib
 
 def main():
-    data = emojilib.generate(text="絵文\n字。", width=128, height=128)
+    data = emojilib.generate(text="ab\nc.", width=128, height=128)
 
-    with open('emoji.png') as f:
+    with open('emoji.png', 'wb') as f:
         f.write(data)
 
 if __name__ == '__main__':
@@ -62,10 +62,22 @@ $ python setup.py build
 ```
 
 ## Development
-### Test
+### Dependencies
 
 ```
 $ pip install -r requirements-dev.txt
+```
+
+### Example
+
+```
+$ python setup.py install
+$ python ./example/example.py
+```
+
+### Test
+
+```
 $ python setup.py build install test
 ```
 
