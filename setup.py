@@ -5,7 +5,7 @@ import sys
 from setuptools import Extension, setup
 from Cython.Build import cythonize
 
-VERSION = '0.1.7'
+VERSION = '1.0.0'
 
 
 extra_objects = [
