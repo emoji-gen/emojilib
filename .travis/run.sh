@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu -o pipefail
 
 PATH=/usr/local/opt/gnu-getopt/bin:$PATH
 

@@ -7,10 +7,11 @@ import subprocess
 from importlib import machinery
 from pathlib import Path
 
+import click
 from git import Repo
 
 GEMFURY_AS = 'emoji-gen'
-GEMFURY_API_TOKEN = os.environ['GEMFURY_API_TOKEN']
+GEMFURY_API_TOKEN = os.getenv('GEMFURY_API_TOKEN', '')
 PACKAGE_NAME = 'emojilib'
 
 
@@ -59,11 +60,23 @@ def find_wheel_path(version):
 
 def push_to_gemfary(wheel_path):
     subprocess.run(['fury', 'push', wheel_path,
-        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN], check=True)
 
 
-def publish():
+def push_to_pypi(wheel_path, repository):
+    subprocess.run(
+        ['twine', 'upload', '--repository', repository, wheel_path], check=True)
+
+
+@click.command()
+@click.option(
+    '--target',
+    type=click.Choice(['gemfury', 'pypi', 'pypitest']),
+    default='gemfury'
+)
+def publish(target):
+    print('Target: ' + target)
+
     branch = find_branch()
     print('Branch: ' + branch)
 
@@ -88,6 +101,10 @@ def publish():
 
     if not wheel_path:
         print('wheel path not found')
+        return
+
+    if target != 'gemfury':
+        push_to_pypi(wheel_path, target)
         return
 
     packages = find_gemfary_packages()
