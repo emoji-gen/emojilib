@@ -12,7 +12,7 @@ git lfs install
 git lfs pull
 
 # install retry
-brew install gnu-getopt || true
+brew install gnu-getopt
 sudo curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry
 sudo chmod +x /usr/local/bin/retry
 
