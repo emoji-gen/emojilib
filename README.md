@@ -15,6 +15,7 @@
 ### Official supported platforms
 
 - macOS 10.12 Sierra
+- macOS 10.13 High Sierra
 - Debian 9 Stretch
 
 ## Used libraries
