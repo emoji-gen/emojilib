@@ -7,10 +7,11 @@ import subprocess
 from importlib import machinery
 from pathlib import Path
 
+import click
 from git import Repo
 
 GEMFURY_AS = 'emoji-gen'
-GEMFURY_API_TOKEN = os.environ['GEMFURY_API_TOKEN']
+GEMFURY_API_TOKEN = getenv('GEMFURY_API_TOKEN', '')
 PACKAGE_NAME = 'emojilib'
 
 
@@ -62,7 +63,7 @@ def push_to_gemfary(wheel_path):
         '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
 
-
+@click.command()
 def publish():
     branch = find_branch()
     print('Branch: ' + branch)
@@ -90,21 +91,21 @@ def publish():
         print('wheel path not found')
         return
 
-    packages = find_gemfary_packages()
-    print(packages)
+    # packages = find_gemfary_packages()
+    # print(packages)
 
-    package_created = PACKAGE_NAME in packages
-    if not package_created:
-        print('WARN: `{}` is not found in gemfury'.format(PACKAGE_NAME))
+    # package_created = PACKAGE_NAME in packages
+    # if not package_created:
+    #     print('WARN: `{}` is not found in gemfury'.format(PACKAGE_NAME))
 
-    if package_created:
-        versions = find_gemfary_versions()
-        print(versions)
+    # if package_created:
+    #     versions = find_gemfary_versions()
+    #     print(versions)
 
-        if release_version in versions:
-            print('WARN: {} is already released'.format(release_version))
+    #     if release_version in versions:
+    #         print('WARN: {} is already released'.format(release_version))
 
-    push_to_gemfary(wheel_path)
+    # push_to_gemfary(wheel_path)
 
 
 if __name__ == '__main__':
