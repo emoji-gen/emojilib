@@ -12,6 +12,8 @@ from git import Repo
 
 GEMFURY_AS = 'emoji-gen'
 GEMFURY_API_TOKEN = os.getenv('GEMFURY_API_TOKEN', '')
+PYPI_USERNAME = os.getenv('PYPI_USERNAME', '')
+PYPI_PASSWORD = os.getenv('PYPI_PASSWORD', '')
 PACKAGE_NAME = 'emojilib'
 
 
@@ -64,8 +66,12 @@ def push_to_gemfary(wheel_path):
 
 
 def push_to_pypi(wheel_path, repository):
-    subprocess.run(
-        ['twine', 'upload', '--repository', repository, wheel_path], check=True)
+    repository_urls = {
+        'pypi': 'https://upload.pypi.org/legacy/',
+        'pypitest': 'https://test.pypi.org/legacy/',
+    }
+    subprocess.run(['twine', 'upload', '--repository-url', repository_urls[repository],
+        '--username', PYPI_USERNAME, '--password', PYPI_PASSWORD, wheel_path], check=True)
 
 
 @click.command()
