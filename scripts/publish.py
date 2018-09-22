@@ -11,7 +11,7 @@ import click
 from git import Repo
 
 GEMFURY_AS = 'emoji-gen'
-GEMFURY_API_TOKEN = getenv('GEMFURY_API_TOKEN', '')
+GEMFURY_API_TOKEN = os.getenv('GEMFURY_API_TOKEN', '')
 PACKAGE_NAME = 'emojilib'
 
 
@@ -60,11 +60,23 @@ def find_wheel_path(version):
 
 def push_to_gemfary(wheel_path):
     subprocess.run(['fury', 'push', wheel_path,
-        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN], check=True)
+
+
+def push_to_pypi(wheel_path, repository):
+    subprocess.run(
+        ['twine', 'upload', '--repository', repository, wheel_path], check=True)
+
 
 @click.command()
-def publish():
+@click.option(
+    '--target',
+    type=click.Choice(['gemfury', 'pypi', 'pypitest']),
+    default='gemfury'
+)
+def publish(target):
+    print('Target: ' + target)
+
     branch = find_branch()
     print('Branch: ' + branch)
 
@@ -91,21 +103,25 @@ def publish():
         print('wheel path not found')
         return
 
-    # packages = find_gemfary_packages()
-    # print(packages)
+    if target != 'gemfury':
+        push_to_pypi(wheel_path, target)
+        return
 
-    # package_created = PACKAGE_NAME in packages
-    # if not package_created:
-    #     print('WARN: `{}` is not found in gemfury'.format(PACKAGE_NAME))
+    packages = find_gemfary_packages()
+    print(packages)
 
-    # if package_created:
-    #     versions = find_gemfary_versions()
-    #     print(versions)
+    package_created = PACKAGE_NAME in packages
+    if not package_created:
+        print('WARN: `{}` is not found in gemfury'.format(PACKAGE_NAME))
 
-    #     if release_version in versions:
-    #         print('WARN: {} is already released'.format(release_version))
+    if package_created:
+        versions = find_gemfary_versions()
+        print(versions)
 
-    # push_to_gemfary(wheel_path)
+        if release_version in versions:
+            print('WARN: {} is already released'.format(release_version))
+
+    push_to_gemfary(wheel_path)
 
 
 if __name__ == '__main__':
