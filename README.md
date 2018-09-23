@@ -93,5 +93,9 @@ $ pip install wheel --upgrade
 $ python setup.py bdist_wheel
 ```
 
+## See also
+- [emojilib (Gemfury)](https://gemfury.com/emoji-gen/python:emojilib)
+- [emojilib (PyPI)](https://pypi.org/project/emojilib/)
+
 ## License
 MIT &copy; [Emoji Generator](https://emoji-gen.ninja)
