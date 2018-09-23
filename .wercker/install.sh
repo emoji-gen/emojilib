@@ -1,9 +1,9 @@
 #!/bin/bash
 
-set -eux
+set -eux -o pipefail
 
 git submodule update --init --recursive
 
-/usr/local/python-3.5/bin/python -m pip install -r requirements-dev.txt
-/usr/local/python-3.6/bin/python -m pip install -r requirements-dev.txt
-/usr/local/python-3.7/bin/python -m pip install -r requirements-dev.txt
+for v in 3.5 3.6 3.7; do
+  /usr/local/python-$v/bin/python -m pip install -r requirements-dev.txt
+done
