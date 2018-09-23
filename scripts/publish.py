@@ -70,8 +70,19 @@ def push_to_pypi(wheel_path, repository):
         'pypi': 'https://upload.pypi.org/legacy/',
         'pypitest': 'https://test.pypi.org/legacy/',
     }
-    subprocess.run(['twine', 'upload', '--repository-url', repository_urls[repository],
-        '--username', PYPI_USERNAME, '--password', PYPI_PASSWORD, wheel_path], check=True)
+    args = ['twine', 'upload', '--repository-url', repository_urls[repository],
+        '--username', PYPI_USERNAME, '--password', PYPI_PASSWORD, wheel_path]
+    proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+    already_exists = False
+    while proc.poll() is None:
+        line = proc.stdout.readline().decode('utf-8')
+        sys.stdout.write(line)
+        if '400 Client Error: File already exists.' in line:
+            already_exists = True
+
+    if proc.returncode != 0 and not already_exists:
+        sys.exit(proc.returncode)
 
 
 @click.command()
