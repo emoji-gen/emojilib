@@ -1,21 +1,12 @@
 #!/bin/bash
 
-set -eux
+set -eux -o pipefail
 
-# 3.5
-./scripts/clean.sh
-/usr/local/python-3.5/bin/python setup.py bdist_wheel install test
-/usr/local/python-3.5/bin/python scripts/publish.py --target=gemfury
-/usr/local/python-3.5/bin/python scripts/publish.py --target=pypi
+for v in 3.5 3.6 3.7; do
+  ./scripts/clean.sh
+  /usr/local/python-$v/bin/python setup.py bdist_wheel install test
+  /usr/local/python-$v/bin/python scripts/publish.py --target=gemfury
+  PATH=/usr/local/python-$v/bin:$PATH \
+    /usr/local/python-$v/bin/python scripts/publish.py --target=pypi
+done
 
-# 3.6
-./scripts/clean.sh
-/usr/local/python-3.6/bin/python setup.py bdist_wheel install test
-/usr/local/python-3.6/bin/python scripts/publish.py --target=gemfury
-/usr/local/python-3.6/bin/python scripts/publish.py --target=pypi
-
-# 3.7
-./scripts/clean.sh
-/usr/local/python-3.7/bin/python setup.py bdist_wheel install test
-/usr/local/python-3.7/bin/python scripts/publish.py --target=gemfury
-/usr/local/python-3.7/bin/python scripts/publish.py --target=pypi
