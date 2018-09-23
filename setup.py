@@ -57,8 +57,10 @@ def main():
         author_email='ultimate.emoji.gen@gmail.com',
         license='MIT License',
         classifiers=[
-            'Development Status :: 3 - Alpha',
+            'Development Status :: 5 - Production/Stable',
             'License :: OSI Approved :: MIT License',
+            'Programming Language :: Cython',
+            'Programming Language :: Python :: Implementation :: CPython',
             'Programming Language :: Python :: 3 :: Only',
             'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',
