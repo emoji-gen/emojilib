@@ -1,4 +1,5 @@
 # emojilib
+[![PyPI version](https://badge.fury.io/py/emojilib.svg)](https://badge.fury.io/py/emojilib)
 [![Build Status](https://travis-ci.org/emoji-gen/emojilib.svg?branch=master)](https://travis-ci.org/emoji-gen/emojilib)
 [![wercker status](https://app.wercker.com/status/486fa62cf2efbf47c595632b1e902e58/s/master "wercker status")](https://app.wercker.com/project/byKey/486fa62cf2efbf47c595632b1e902e58)
 [![Requirements Status](https://requires.io/github/emoji-gen/emojilib/requirements.svg?branch=master)](https://requires.io/github/emoji-gen/emojilib/requirements/?branch=master)
@@ -93,6 +94,10 @@ $ python setup.py build install test
 $ pip install wheel --upgrade
 $ python setup.py bdist_wheel
 ```
+
+## See also
+- [emojilib (Gemfury)](https://gemfury.com/emoji-gen/python:emojilib)
+- [emojilib (PyPI)](https://pypi.org/project/emojilib/)
 
 ## License
 MIT &copy; [Emoji Generator](https://emoji-gen.ninja)
