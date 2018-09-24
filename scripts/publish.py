@@ -9,6 +9,7 @@ from pathlib import Path
 
 import click
 from git import Repo
+from humanfriendly import format_size
 
 GEMFURY_AS = 'emoji-gen'
 GEMFURY_API_TOKEN = os.getenv('GEMFURY_API_TOKEN', '')
@@ -104,10 +105,13 @@ def publish(target):
     in_release_branch = branch.startswith('release/')
     release_version = find_release_version()
     wheel_path = find_wheel_path(release_version)
+    wheel_size = format_size(os.path.getsize(wheel_path))
 
     print('In release branch: {}'.format(in_release_branch))
     print('Release version: {}'.format(release_version))
     print('Wheel path: {}'.format(wheel_path))
+    print('Wheel size: {}'.format(wheel_size))
+
 
     if not in_release_branch:
         print('Not in release branch')

@@ -6,6 +6,7 @@ click==6.7
 Cython==0.28.5
 gitdb2==2.0.4
 GitPython==2.1.11
+humanfriendly==4.16.1
 idna==2.7
 more-itertools==4.3.0
 pkginfo==1.4.2

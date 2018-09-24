@@ -3,3 +3,4 @@ GitPython
 pytest
 twine
 click
+humanfriendly
