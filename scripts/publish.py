@@ -61,6 +61,10 @@ def find_wheel_path(version):
     return str(list(paths)[0])
 
 
+def auditwheel_show(wheel_path):
+    subprocess.run(['auditwheel', 'show', wheel_path])
+
+
 def push_to_gemfary(wheel_path):
     subprocess.run(['fury', 'push', wheel_path,
         '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN], check=True)
@@ -125,6 +129,7 @@ def publish(target):
         return
 
     if target != 'gemfury':
+        auditwheel_show(wheel_path)
         push_to_pypi(wheel_path, target)
         return
 
