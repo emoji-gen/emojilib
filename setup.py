@@ -28,6 +28,7 @@ if sys.platform.startswith('darwin'):
     ])
 elif sys.platform.startswith('linux'):
     extra_link_args.extend([
+        '-static-libgcc',
         '-static-libstdc++',
     ])
     libraries.extend([
