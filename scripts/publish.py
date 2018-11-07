@@ -146,7 +146,7 @@ def publish(target):
         print('wheel path not found')
         return
 
-    if target != 'gemfury':
+    if target.startswith('pypi'):
         repair_wheel(wheel_path)
         push_to_pypi(wheel_path, target)
         return
