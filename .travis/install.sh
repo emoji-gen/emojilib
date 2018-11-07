@@ -23,13 +23,9 @@ git clone https://github.com/tagomoris/xbuild.git ~/local/xbuild
 ~/local/xbuild/python-install -f $PYTHON_36_VERSION ~/local/python-3.6
 ~/local/xbuild/python-install -f $PYTHON_37_VERSION ~/local/python-3.7
 
-for v in 3.5 3.6 3.7; do
-  ~/local/python-$v/bin/pip3 install --upgrade pip
-  ~/local/python-$v/bin/pip3 install --upgrade wheel
-done
-
 # install requirements
 for v in 3.5 3.6 3.7; do
+  ~/local/python-$v/bin/pip3 install 'wheel==0.31.1'
   ~/local/python-$v/bin/pip3 install -r requirements-dev.txt
 done
 gem install gemfury --no-document
