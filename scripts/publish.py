@@ -2,10 +2,11 @@
 # -*- encoding: utf-8 -*-
 
 import os
-import sys
 import subprocess
+import sys
 from importlib import machinery
 from pathlib import Path
+from subprocess import CalledProcessError
 
 import click
 from git import Repo
