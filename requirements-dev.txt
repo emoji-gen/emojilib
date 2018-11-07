@@ -8,6 +8,7 @@ Cython==0.29
 docutils==0.14
 gitdb2==2.0.5
 GitPython==2.1.11
+humanfriendly==4.16.1
 idna==2.7
 more-itertools==4.3.0
 pkginfo==1.4.2
