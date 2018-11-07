@@ -38,18 +38,28 @@ def find_release_version():
 
 
 def find_gemfary_packages():
-    subprocess.run(['fury', '-v'], stdout=subprocess.PIPE, check=True)
-    process = subprocess.run(['fury', 'list',
-        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    try:
+        subprocess.run(['fury', '-v'], stdout=subprocess.PIPE, check=True)
+        process = subprocess.run(['fury', 'list',
+            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    except CalledProcessError as e:
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
     packages = process.stdout.decode('utf-8')
     return packages
 
 
 def find_gemfary_versions():
-    process = subprocess.run(['fury', 'versions', PACKAGE_NAME,
-        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    try:
+        process = subprocess.run(['fury', 'versions', PACKAGE_NAME,
+            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN],
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True)
+    except CalledProcessError as e:
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
     versions = process.stdout.decode('utf-8')
     return versions
 
@@ -68,8 +78,13 @@ def repair_wheel(wheel_path):
 
 
 def push_to_gemfary(wheel_path):
-    subprocess.run(['fury', 'push', wheel_path,
-        '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN], check=True)
+    try:
+        subprocess.run(['fury', 'push', wheel_path,
+            '--as=' + GEMFURY_AS, '--api-token=' + GEMFURY_API_TOKEN], check=True)
+    except CalledProcessError as e:
+        print(e.output)
+        raise CalledProcessError(
+            returncode=e.returncode, cmd=[], output=e.output, stderr=e.stderr)
 
 
 def push_to_pypi(wheel_path, repository):
