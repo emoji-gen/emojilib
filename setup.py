@@ -27,10 +27,6 @@ if sys.platform.startswith('darwin'):
         '-framework', 'CoreServices',
     ])
 elif sys.platform.startswith('linux'):
-    extra_link_args.extend([
-        '-static-libgcc',
-        '-static-libstdc++',
-    ])
     libraries.extend([
         'dl',
         'fontconfig',
