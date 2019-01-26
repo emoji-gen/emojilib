@@ -1,7 +1,7 @@
 os: osx
 osx_image:
-  - xcode9.2
-  - xcode9.4
+  - xcode9.2 # Sierra
+  - xcode10.1 # High Sierra
 language: generic
 
 env:
