@@ -20,6 +20,6 @@ build:
   after-steps:
     - install-packages:
         packages: ruby
-    - slack-nofitier:
+    - slack-notifier:
         url: $SLACK_WEBHOOK_URL
         notify_on: failed
