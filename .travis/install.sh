@@ -6,11 +6,6 @@ PYTHON_36_VERSION=3.6.10
 PYTHON_37_VERSION=3.7.6
 PYTHON_38_VERSION=3.8.2
 
-# install lfs
-brew install git-lfs
-git lfs install
-git lfs pull
-
 # install retry
 brew install gnu-getopt
 sudo curl https://raw.githubusercontent.com/kadwanev/retry/master/retry -o /usr/local/bin/retry
