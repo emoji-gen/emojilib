@@ -1,5 +1,5 @@
 build:
-  box: emojigen/docker-emojilib
+  box: emojigen/pyext:buster
   steps:
     - script:
         name: install dependencies
