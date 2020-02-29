@@ -2,7 +2,7 @@
 
 set -eux -o pipefail
 
-git submodule update --init --recursive --jobs=$(($(nproc) * 3))
+git submodule update --init --recursive --jobs=$(nproc)
 
 apt-get update -qq
 apt-get -qq install -y --no-install-recommends unzip patchelf
