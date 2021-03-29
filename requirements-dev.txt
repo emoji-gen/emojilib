@@ -14,7 +14,7 @@ more-itertools==5.0.0
 pkginfo==1.5.0.1
 pluggy==0.8.1
 py==1.7.0
-pygments==2.3.1
+pygments==2.7.4
 pytest==4.1.1
 readme-renderer==24.0
 requests-toolbelt==0.8.0
