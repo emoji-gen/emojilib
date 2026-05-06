@@ -53,7 +53,7 @@ jobs:
           - '3.14'
     needs: [ build_libemoji ]
     runs-on: ${{ matrix.os }}
-    name: Test emojilib (${{ matrix.os }}, py${{ matrix.python-version }})
+    name: Test (${{ matrix.os }}, Python ${{ matrix.python-version }})
     steps:
       - uses: actions/checkout@v5
         with:
