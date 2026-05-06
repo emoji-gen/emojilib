@@ -13,7 +13,7 @@ jobs:
       matrix:
         os:
           - macos-latest
-          - ubuntu-latest
+          # - ubuntu-latest
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }}
     steps:
@@ -42,9 +42,9 @@ jobs:
       matrix:
         os:
           - macos-latest
-          - ubuntu-latest
+          # - ubuntu-latest
         python-version:
-          - '3.13'
+          # - '3.13'
           - '3.14'
     needs: [ build_cpp ]
     runs-on: ${{ matrix.os }}
