@@ -37,6 +37,11 @@ jobs:
           cmake --build .
           du -h tmp/libskia.a
           du -h lib/libemoji.a
+      - name: Upload libemoji.a
+        uses: actions/upload-artifact@v7
+        with:
+          name: libemoji_${{ matrix.os }}
+          path: lib/libemoji.a
   build_emojilib:
     strategy:
       matrix:
@@ -59,3 +64,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Show Python version
         run: python --version
+      - name: Download libemoji.a
+        uses: actions/download-artifact@v8
+        with:
+          name: libemoji_${{ matrix.os }}
+          path: lib/libemoji.a
