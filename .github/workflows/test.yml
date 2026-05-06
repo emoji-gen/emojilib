@@ -8,14 +8,14 @@ on:
   push:
 
 jobs:
-  build_cpp:
+  build_libemoji:
     strategy:
       matrix:
         os:
           - macos-latest
           # - ubuntu-latest
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }}
+    name: Build libemoji (${{ matrix.os }})
     steps:
       - uses: actions/checkout@v5
         with:
@@ -37,7 +37,7 @@ jobs:
           cmake --build .
           du -h tmp/libskia.a
           du -h lib/libemoji.a
-  build_py:
+  build_emojilib:
     strategy:
       matrix:
         os:
@@ -46,9 +46,9 @@ jobs:
         python-version:
           # - '3.13'
           - '3.14'
-    needs: [ build_cpp ]
+    needs: [ build_libemoji ]
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} (Python ${{ matrix.python-version }})
+    name: Build emojilib (${{ matrix.os }}/Py ${{ matrix.python-version }})
     steps:
       - uses: actions/checkout@v5
         with:
