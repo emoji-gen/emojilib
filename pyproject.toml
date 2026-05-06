@@ -3,5 +3,7 @@ requires = ["setuptools", "cython"]
 build-backend = "setuptools.build_meta"
 
 [project]
+name = "emojilib"
+version = "1.0.1"
 dependencies = [
 ]
