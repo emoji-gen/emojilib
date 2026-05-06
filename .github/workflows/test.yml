@@ -8,7 +8,7 @@ on:
   push:
 
 jobs:
-  build_libemoji:
+  build_cpp:
     strategy:
       matrix:
         os:
@@ -37,3 +37,18 @@ jobs:
           cmake --build .
           du -h tmp/libskia.a
           du -h lib/libemoji.a
+  build_py:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+    needs: [ build_cpp ]
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - name: Show Python version
+        run: python --version
