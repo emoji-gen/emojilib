@@ -8,14 +8,14 @@ on:
   push:
 
 jobs:
-  libemoji:
+  build_libemoji:
     strategy:
       matrix:
         os:
           - macos-latest
           # - ubuntu-latest
     runs-on: ${{ matrix.os }}
-    name: libemoji (${{ matrix.os }})
+    name: Build libemoji (${{ matrix.os }})
     steps:
       - uses: actions/checkout@v5
         with:
@@ -42,7 +42,7 @@ jobs:
         with:
           name: libemoji_${{ matrix.os }}
           path: lib/libemoji.a
-  build_emojilib:
+  test_emojilib:
     strategy:
       matrix:
         os:
@@ -51,9 +51,9 @@ jobs:
         python-version:
           # - '3.13'
           - '3.14'
-    needs: [ libemoji ]
+    needs: [ build_libemoji ]
     runs-on: ${{ matrix.os }}
-    name: emojilib (${{ matrix.os }}, py${{ matrix.python-version }})
+    name: Test emojilib (${{ matrix.os }}, py${{ matrix.python-version }})
     steps:
       - uses: actions/checkout@v5
         with:
