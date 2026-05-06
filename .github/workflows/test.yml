@@ -68,4 +68,3 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: libemoji_${{ matrix.os }}
-          path: lib/libemoji.a
