@@ -41,7 +41,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: libemoji_${{ matrix.os }}
-          path: lib/libemoji.a
+          path: externals/libemoji/lib/libemoji.a
   test_emojilib:
     strategy:
       matrix:
