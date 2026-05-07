@@ -68,6 +68,7 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: lib-${{ matrix.os }}
+          path: externals/libemoji/lib/libemoji.a
       - name: Check artifact
         run: |
           ls -l externals/libemoji/lib/
