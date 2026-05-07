@@ -71,11 +71,11 @@ jobs:
           path: externals/libemoji/lib/libemoji.a
       - name: Check artifact
         run: |
-          ls -l externals/libemoji/lib/
-          ls -l lib/
+          du -h lib/libemoji.a
       - name: Test
         run: |
-          python -m pip install build pytest --upgrade
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade build pytest wheel
           python -m build --wheel
           python -m pip install .
           python -m pytest test
