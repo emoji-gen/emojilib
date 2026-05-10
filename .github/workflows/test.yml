@@ -72,6 +72,7 @@ jobs:
           path: externals/libemoji/lib/libemoji.a
       - name: Check artifact
         run: |
+          file lib/libemoji.a
           du -h lib/libemoji.a
       - name: Test
         env:
