@@ -14,8 +14,12 @@ jobs:
         os:
           - macos-latest
           # - ubuntu-latest
+        python-version:
+          # - '3.13'
+          - '3.14'
     runs-on: ${{ matrix.os }}
-    name: Prebuild (${{ matrix.os }})
+    # name: Prebuild (${{ matrix.os }})
+    name: Build (${{ matrix.os }}, py${{ matrix.python-version }})
     steps:
       - uses: actions/checkout@v5
         with:
@@ -37,39 +41,38 @@ jobs:
           cmake --build .
           du -h tmp/libskia.a
           du -h lib/libemoji.a
-      - name: Upload libemoji.a
-        uses: actions/upload-artifact@v7
-        with:
-          name: lib-${{ matrix.os }}
-          path: externals/libemoji/lib/libemoji.a
-  build:
-    strategy:
-      matrix:
-        os:
-          - macos-latest
-          # - ubuntu-latest
-        python-version:
-          # - '3.13'
-          - '3.14'
-    needs: [ prebuild ]
-    runs-on: ${{ matrix.os }}
-    name: Build (${{ matrix.os }}, py${{ matrix.python-version }})
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          submodules: recursive
+      # - name: Upload libemoji.a
+      #   uses: actions/upload-artifact@v7
+      #   with:
+      #     name: lib-${{ matrix.os }}
+      #     path: externals/libemoji/lib/libemoji.a
+  # build:
+  #   strategy:
+  #     matrix:
+  #       os:
+  #         - macos-latest
+  #         # - ubuntu-latest
+  #       python-version:
+  #         # - '3.13'
+  #         - '3.14'
+  #   needs: [ prebuild ]
+    # runs-on: ${{ matrix.os }}
+    # name: Build (${{ matrix.os }}, py${{ matrix.python-version }})
+    # steps:
+      # - uses: actions/checkout@v5
+      #   with:
+      #     submodules: recursive
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-          architecture: arm64
       - name: Show Python version
         run: python --version
-      - name: Download libemoji.a
-        uses: actions/download-artifact@v8
-        with:
-          name: lib-${{ matrix.os }}
-          path: externals/libemoji/lib/libemoji.a
+      # - name: Download libemoji.a
+      #   uses: actions/download-artifact@v8
+      #   with:
+      #     name: lib-${{ matrix.os }}
+      #     path: externals/libemoji/lib/libemoji.a
       - name: Check artifact
         run: |
           du -h lib/libemoji.a
