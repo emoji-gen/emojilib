@@ -12,7 +12,7 @@ extra_objects = [
     'lib/libemoji.a',
 ]
 extra_compile_args = [
-    '-std=c11',
+    '-std=c++20',
     '-Wall',
     '-Wextra',
 ]
@@ -45,7 +45,7 @@ def main():
         libraries=libraries,
         extra_compile_args=extra_compile_args,
         extra_link_args=extra_link_args,
-        language='c11'
+        language='c++'
     )
 
     setup(

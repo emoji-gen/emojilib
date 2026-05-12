@@ -15,6 +15,7 @@ __pycache__
 *.so
 *.a
 *.c
+*.cpp
 
 # example
 *.png
