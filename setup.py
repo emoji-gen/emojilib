@@ -55,17 +55,6 @@ def main():
         url='https://github.com/emoji-gen/emojilib',
         author='Emoji Generator',
         author_email='ultimate.emoji.gen@gmail.com',
-        license='MIT License',
-        classifiers=[
-            'Development Status :: 5 - Production/Stable',
-            'License :: OSI Approved :: MIT License',
-            'Programming Language :: Cython',
-            'Programming Language :: Python :: Implementation :: CPython',
-            'Programming Language :: Python :: 3 :: Only',
-            'Programming Language :: Python :: 3.5',
-            'Programming Language :: Python :: 3.6',
-            'Programming Language :: Python :: 3.7',
-        ],
         setup_requires=['pytest-runner'],
         tests_require=['pytest'],
         ext_modules=cythonize([extension])
