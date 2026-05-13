@@ -28,11 +28,12 @@ if sys.platform.startswith('darwin'):
     ])
 elif sys.platform.startswith('linux'):
     libraries.extend([
+        'GL',
+        'GLU',
         'dl',
         'fontconfig',
         'freetype',
-        'GL',
-        'GLU',
+        'z',
     ])
 
 
