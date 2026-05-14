@@ -110,4 +110,5 @@ jobs:
         run: |
           python -m auditwheel show dist/*.whl
           python -m auditwheel repair dist/*.whl
+          du -h wheelhouse/*.whl
 
