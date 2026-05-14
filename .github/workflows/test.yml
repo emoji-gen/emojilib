@@ -49,6 +49,7 @@ jobs:
           - macos-latest
           - ubuntu-latest
         python-version:
+          # https://devguide.python.org/versions/
           - '3.10'
           - '3.11'
           - '3.12'
