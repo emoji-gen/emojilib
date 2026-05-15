@@ -106,8 +106,7 @@ jobs:
       - name: Check build results
         run:  |
           file build/lib.*/*.so
-          ls -l dist/
-          du -h dist/*.whl
+          ls -lh dist/
       - name: Test
         run: |
           python -m pip install dist/*.whl
@@ -120,5 +119,4 @@ jobs:
       - name: Review audit results
         if: runner.os == 'Linux'
         run:  |
-          ls -l wheelhouse/
-          du -h wheelhouse/*.whl
+          ls -lh wheelhouse/
