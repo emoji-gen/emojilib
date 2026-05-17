@@ -83,7 +83,7 @@ jobs:
             python -m pip install --upgrade auditwheel
           fi
       - name: Download libemoji.a
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: lib-${{ matrix.os }}
           path: externals/libemoji/lib
