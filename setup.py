@@ -46,14 +46,7 @@ def main():
         extra_link_args=extra_link_args,
         language='c++'
     )
-
-    setup(
-        author='Emoji Generator',
-        author_email='ultimate.emoji.gen@gmail.com',
-        setup_requires=['pytest-runner'],
-        tests_require=['pytest'],
-        ext_modules=cythonize([extension])
-    )
+    setup(ext_modules=cythonize([extension]))
 
 
 if __name__ == '__main__':
