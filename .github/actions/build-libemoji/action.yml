@@ -5,6 +5,8 @@ runs:
   steps:
     - name: Show CMake version
       run: cmake --version
+      shell: bash
     - name: Show Python version
       run: python --version
+      shell: bash
 
