@@ -52,7 +52,6 @@ def main():
     setup(
         name='emojilib',
         version=VERSION,
-        description='Ultimate Emoji Generator library using Skia and Python C Extension',
         url='https://github.com/emoji-gen/emojilib',
         author='Emoji Generator',
         author_email='ultimate.emoji.gen@gmail.com',
