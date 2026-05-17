@@ -9,4 +9,11 @@ runs:
     - name: Show Python version
       run: python --version
       shell: bash
+    - name: Build libemoji
+      run: |
+        cd externals/libemoji
+        cmake .
+        cmake --build .
+        ls -h lib
+      shell: bash
 
