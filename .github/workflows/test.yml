@@ -26,6 +26,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install libfontconfig1-dev libx11-dev \
             libxcomposite-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
+      - name: Build libemoji
+        uses: ./.github/actions/build-libemoji
       - name: Show CMake version
         run: cmake --version
       - name: Show Python version

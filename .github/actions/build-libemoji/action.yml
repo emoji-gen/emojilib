@@ -1,0 +1,10 @@
+name: Build libemoji
+
+runs:
+  using: composite
+  steps:
+    - name: Show CMake version
+      run: cmake --version
+    - name: Show Python version
+      run: python --version
+
