@@ -21,3 +21,18 @@ classifiers = [
 ]
 license = "MIT"
 license-files = ["LICENSE"]
+authors = [
+  {name = "Emoji Generator", email = "ultimate.emoji.gen@gmail.com"},
+]
+
+[project.urls]
+source = "https://github.com/emoji-gen/emojilib"
+
+[dependency-groups]
+dev = [
+    "Cython>=3.2.4",
+    "auditwheel>=6.6.0",
+    "build>=1.5.0",
+    "pytest>=9.0.3",
+    "wheel>=0.47.0",
+]

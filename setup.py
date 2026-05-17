@@ -5,8 +5,6 @@ import sys
 from setuptools import Extension, setup
 from Cython.Build import cythonize
 
-VERSION = '1.0.1'
-
 
 extra_objects = [
     'lib/libemoji.a',
@@ -50,9 +48,6 @@ def main():
     )
 
     setup(
-        name='emojilib',
-        version=VERSION,
-        url='https://github.com/emoji-gen/emojilib',
         author='Emoji Generator',
         author_email='ultimate.emoji.gen@gmail.com',
         setup_requires=['pytest-runner'],

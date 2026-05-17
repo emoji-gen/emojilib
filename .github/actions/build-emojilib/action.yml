@@ -1,0 +1,43 @@
+name: Build emojilib
+
+runs:
+  using: composite
+  steps:
+    - name: Build
+      env:
+        ARCHFLAGS: '-arch arm64'
+      run:  |
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          python -m build --wheel
+        else
+          # If plat-name is not specified,
+          # the build will be for universal2 instead of arm64.
+          python -m build --wheel -C='--build-option=--plat-name=macosx_11_0_arm64'
+        fi
+      shell: bash
+    - name: Check build results
+      run:  |
+        file build/lib.*/*.so
+        ls -lh dist/
+      shell: bash
+    - name: Audit wheel
+      if: runner.os == 'Linux'
+      run: |
+        python -m auditwheel show dist/*.whl
+        python -m auditwheel repair dist/*.whl
+      shell: bash
+    - name: Review audit results
+      if: runner.os == 'Linux'
+      run:  |
+        ls -lh wheelhouse/
+      shell: bash
+    - name: Test
+      run: |
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          python -m pip install wheelhouse/*.whl
+        else
+          python -m pip install dist/*.whl
+        fi
+
+        python -m pytest
+      shell: bash
