@@ -1,6 +1,9 @@
 name: Build emojilib
 
 outputs:
+  wheel-filename:
+    description: 'File name of the built .whl package'
+    value: ${{ steps.show-wheel-path.outputs.wheel-filename }}
   wheel-path:
     description: 'File path of the built .whl package'
     value: ${{ steps.show-wheel-path.outputs.wheel-path }}
@@ -54,5 +57,8 @@ runs:
         else
           WHEEL_PATH=$(find dist -name '*.whl' | xargs realpath | head -n 1)
         fi
+        WHEEL_FILENAME=$(basename $WHEEL_PATH)
+
+        echo "wheel-filename=$WHEEL_FILENAME" >> $GITHUB_OUTPUT
         echo "wheel-path=$WHEEL_PATH" >> $GITHUB_OUTPUT
       shell: bash

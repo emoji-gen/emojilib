@@ -67,6 +67,12 @@ jobs:
       - name: Build emojilib
         id: build-emojilib
         uses: ./.github/actions/build-emojilib
-      - name: Show wheel path
+      - name: Show wheel details
         run: |
           echo ${{ steps.build-emojilib.outputs.wheel-path }}
+          echo ${{ steps.build-emojilib.outputs.wheel-filename }}
+      - name: Upload wheel
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.build-emojilib.outputs.wheel-filename }}
+          path: ${{ steps.build-emojilib.outputs.wheel-path }}
