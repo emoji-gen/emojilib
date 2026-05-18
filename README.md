@@ -9,15 +9,14 @@
 
 ## System requirements
 
-- Python 3.6, 3.7 or 3.8
-- C11 Compiler
+- Python 3.10 ~ 3.14
+- C++20 Compiler
 
 ### Official supported platforms
 We officially support building and running on these platforms below, but you can try it on other platforms.
 
-- macOS 10.14 Mojave
-- macOS 10.15 Catalina
-- Debian 10 Buster
+- macOS 26 Tahoe (arm64)
+- Ubuntu 24.04 (x86\_64)
 
 ## Used libraries
 
