@@ -1,5 +1,10 @@
 name: Build emojilib
 
+outputs:
+  wheel-path:
+    description: 'File path of the built .whl package'
+    value: ${{ steps.show-wheel-path.outputs.wheel-path }}
+
 runs:
   using: composite
   steps:
@@ -40,4 +45,15 @@ runs:
         fi
 
         python -m pytest
+      shell: bash
+    - name: Show wheel path
+      id: show-wheel-path
+      run: |
+        local path
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          path=$(find wheelhouse -name '*.whl' | xargs realpath | head -n 1)
+        else
+          path=$(find dist -name '*.whl' | xargs realpath | head -n 1)
+        fi
+        echo "wheel-path=$path" >> $GITHUB_OUTPUT
       shell: bash

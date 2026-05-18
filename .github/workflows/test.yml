@@ -65,4 +65,8 @@ jobs:
           ls -h lib
           file lib/libemoji.a
       - name: Build emojilib
+        id: build-emojilib
         uses: ./.github/actions/build-emojilib
+      - name: Show wheel path
+        run: |
+          echo ${{ steps.build-emojilib.outputs.wheel-path }}
