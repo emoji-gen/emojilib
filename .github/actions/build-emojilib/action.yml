@@ -49,11 +49,10 @@ runs:
     - name: Show wheel path
       id: show-wheel-path
       run: |
-        local path
         if [ "$RUNNER_OS" = "Linux" ]; then
-          path=$(find wheelhouse -name '*.whl' | xargs realpath | head -n 1)
+          WHEEL_PATH=$(find wheelhouse -name '*.whl' | xargs realpath | head -n 1)
         else
-          path=$(find dist -name '*.whl' | xargs realpath | head -n 1)
+          WHEEL_PATH=$(find dist -name '*.whl' | xargs realpath | head -n 1)
         fi
-        echo "wheel-path=$path" >> $GITHUB_OUTPUT
+        echo "wheel-path=$WHEEL_PATH" >> $GITHUB_OUTPUT
       shell: bash
