@@ -3,10 +3,10 @@ name: Build emojilib
 outputs:
   wheel-filename:
     description: 'File name of the built .whl package'
-    value: ${{ steps.show-wheel-path.outputs.wheel-filename }}
+    value: ${{ steps.check-wheel-path.outputs.wheel-filename }}
   wheel-path:
     description: 'File path of the built .whl package'
-    value: ${{ steps.show-wheel-path.outputs.wheel-path }}
+    value: ${{ steps.check-wheel-path.outputs.wheel-path }}
 
 runs:
   using: composite
@@ -39,18 +39,8 @@ runs:
       run:  |
         ls -lh wheelhouse/
       shell: bash
-    - name: Test
-      run: |
-        if [ "$RUNNER_OS" = "Linux" ]; then
-          python -m pip install wheelhouse/*.whl
-        else
-          python -m pip install dist/*.whl
-        fi
-
-        python -m pytest
-      shell: bash
-    - name: Show wheel path
-      id: show-wheel-path
+    - name: Check wheel path
+      id: check-wheel-path
       run: |
         if [ "$RUNNER_OS" = "Linux" ]; then
           WHEEL_PATH=$(find wheelhouse -name '*.whl' | xargs realpath | head -n 1)
@@ -61,4 +51,9 @@ runs:
 
         echo "wheel-filename=$WHEEL_FILENAME" >> $GITHUB_OUTPUT
         echo "wheel-path=$WHEEL_PATH" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Test
+      run: |
+        python -m pip install "${{ steps.check-wheel-path.outputs.wheel-path }}"
+        python -m pytest
       shell: bash
