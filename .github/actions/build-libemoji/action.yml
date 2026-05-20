@@ -3,8 +3,6 @@ name: Build libemoji
 runs:
   using: composite
   steps:
-    - name: Install OS dependencies
-      uses: ./.github/actions/install-os-dependencies
     - name: Show CMake version
       run: cmake --version
       shell: bash

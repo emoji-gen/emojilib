@@ -30,6 +30,8 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
+      - name: Install OS dependencies
+        uses: ./.github/actions/install-os-dependencies
       - name: Build libemoji
         uses: ./.github/actions/build-libemoji
       - name: Upload libemoji.a
@@ -64,6 +66,10 @@ jobs:
         run: |
           ls -h lib
           file lib/libemoji.a
+      - name: Install OS dependencies
+        uses: ./.github/actions/install-os-dependencies
+      - name: Install Python dependencies
+        uses: ./.github/actions/install-python-dependencies
       - name: Build emojilib
         id: build-emojilib
         uses: ./.github/actions/build-emojilib
