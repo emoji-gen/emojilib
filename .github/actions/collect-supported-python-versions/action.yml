@@ -1,0 +1,15 @@
+name: Collect supported Python versions
+
+runs:
+  using: composite
+  steps:
+    - name: Show Python version
+      run: python --version
+      shell: bash
+    - name: Collect supported Python versions
+      id: python-versions
+      run: |
+        python_versions=$(python ./scripts/supported_python_versions.py)
+        echo "$python_versions"
+        echo "value=${python_versions}" >> $GITHUB_OUTPUT
+      shell: bash

@@ -10,22 +10,14 @@ on:
 jobs:
   supported-python-versions:
     runs-on: ubuntu-latest
-    name: 'Collect supported Python versions'
+    name: Collect supported Python versions
     outputs:
       value: ${{ steps.python-versions.outputs.value }}
     steps:
       - uses: actions/checkout@v5
-        with:
-          submodules: recursive
-      - uses: actions/setup-python@v6
-        with:
-          python-version: 3.14
       - name: Collect supported Python versions
         id: python-versions
-        run: |
-          python_versions=$(python ./scripts/supported_python_versions.py)
-          echo "$python_versions"
-          echo "value=${python_versions}" >> $GITHUB_OUTPUT
+        uses: ./.github/actions/collect-supported-python-versions
   prebuild:
     strategy:
       matrix:
