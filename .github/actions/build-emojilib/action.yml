@@ -11,6 +11,10 @@ outputs:
 runs:
   using: composite
   steps:
+    - name: Install OS dependencies
+      uses: ./.github/actions/install-os-dependencies
+    - name: Install Python dependencies
+      uses: ./.github/actions/install-python-dependencies
     - name: Build
       env:
         ARCHFLAGS: '-arch arm64'
