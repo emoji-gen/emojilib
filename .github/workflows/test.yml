@@ -8,6 +8,23 @@ on:
   push:
 
 jobs:
+  python-versions:
+    runs-on: ubuntu-latest
+    outputs:
+      supported-python-versions: ${{ steps.python-versions.outputs.value }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - uses: actions/setup-python@v6
+        with:
+          python-version: 3.14
+      - name: Collect supported Python versions
+        id: python-versions
+        run: |
+          versions=$(python ./scripts/supported_python_versions.py)
+          echo "$versions"
+          echo "value=${versions}" >> $GITHUB_OUTPUT
   prebuild:
     strategy:
       matrix:
@@ -40,7 +57,7 @@ jobs:
           - '3.12'
           - '3.13'
           - '3.14'
-    needs: [ prebuild ]
+    needs: [ prebuild, python-versions ]
     runs-on: ${{ matrix.os }}
     name: Build (${{ matrix.os }}, py${{ matrix.python-version }})
     steps:
