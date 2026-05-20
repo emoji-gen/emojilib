@@ -8,10 +8,10 @@ on:
   push:
 
 jobs:
-  python-versions:
+  supported-python-versions:
     runs-on: ubuntu-latest
     outputs:
-      supported-python-versions: ${{ steps.python-versions.outputs.value }}
+      value: ${{ steps.python-versions.outputs.value }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -22,9 +22,9 @@ jobs:
       - name: Collect supported Python versions
         id: python-versions
         run: |
-          versions=$(python ./scripts/supported_python_versions.py)
-          echo "$versions"
-          echo "value=${versions}" >> $GITHUB_OUTPUT
+          python_versions=$(python ./scripts/supported_python_versions.py)
+          echo "$python_versions"
+          echo "value=${python_versions}" >> $GITHUB_OUTPUT
   prebuild:
     strategy:
       matrix:
@@ -50,14 +50,8 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-        python-version:
-          # https://devguide.python.org/versions/
-          - '3.10'
-          - '3.11'
-          - '3.12'
-          - '3.13'
-          - '3.14'
-    needs: [ prebuild, python-versions ]
+        python-version: ${{ fromJson(needs.supported-python-versions.outputs.value) }}
+    needs: [ prebuild, supported-python-versions ]
     runs-on: ${{ matrix.os }}
     name: Build (${{ matrix.os }}, py${{ matrix.python-version }})
     steps:
