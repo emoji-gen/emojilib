@@ -1,1 +1,6 @@
 name: Publish
+
+jobs:
+  aaa:
+    runs-on: ubuntu-latest
+    steps: []
