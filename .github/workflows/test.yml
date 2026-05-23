@@ -31,7 +31,8 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
-      - uses: ./.github/actions/prebuild
+      - name: Prebuild
+        uses: ./.github/actions/prebuild
         id: prebuild
   build:
     strategy:

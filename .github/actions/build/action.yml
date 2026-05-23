@@ -26,7 +26,7 @@ runs:
     - name: Build artifact name
       id: build-artifact-name
       run: |
-        artifact_name=(echo '${{ inputs.artifact-name }}' | envsubst '$RUNNER_OS')
+        artifact_name=$(echo '${{ inputs.artifact-name }}' | envsubst '$RUNNER_OS')
         echo "$artifact_name"
         echo "value=$artifact_name" >> $GITHUB_OUTPUT
       shell: bash
