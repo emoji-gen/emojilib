@@ -9,9 +9,9 @@ runs:
   using: composite
   steps:
     - uses: ./.github/actions/install-os-dependencies
-    # - uses: ./.github/actions/build-libemoji
-    # - name: Upload libemoji.a
-    #   uses: actions/upload-artifact@v7
-    #   with:
-    #     name: "${{ runner.os }}_libemoji.a"
-    #     path: externals/libemoji/lib/libemoji.a
+    - uses: ./.github/actions/build-libemoji
+    - name: Upload libemoji.a
+      uses: actions/upload-artifact@v7
+      with:
+        name: "${{ runner.os }}_libemoji.a"
+        path: externals/libemoji/lib/libemoji.a

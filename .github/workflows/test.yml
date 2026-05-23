@@ -49,10 +49,17 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Download libemoji.a
+      - name: Build artifact name
+        id: build-artifact-name
+        run: |
+          artifact_name=(echo '${{ needs.prebuild.outputs.artifact-name }}' | envsubst '$RUNNER_OS')
+          echo "$artifact_name"
+          echo "value=$artifact_name" >> $GITHUB_OUTPUT
+        shell: bash
+      - name: Download artifact
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
-          name: "${{ matrix.os }}_libemoji.a"
+          name: ${{ steps.build-artifact-name.outputs.value }}
           path: externals/libemoji/lib
       - name: Check artifact
         run: |
