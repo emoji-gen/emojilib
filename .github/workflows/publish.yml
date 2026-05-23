@@ -32,7 +32,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Prebuild (${{ matrix.os }})
     outputs:
-      artifact-name: ${{ steps.prebuild..outputs.artifact-name }}
+      artifact-name: ${{ steps.prebuild.outputs.artifact-name }}
     steps:
       - uses: actions/checkout@v5
         with:
