@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "emojilib"
 description = "Ultimate Emoji Generator library using Skia and Python C Extension"
-version = "1.0.1"
+version = "1.1.0"
 dependencies = [
 ]
 classifiers = [
