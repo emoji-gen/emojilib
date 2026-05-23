@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Collect supported Python versions
     outputs:
-      value: ${{ steps.supported-python-versions.outputs.value }}
+      value: ${{ steps.run-script..outputs.python-versions }}
     steps:
       - uses: actions/checkout@v5
       - name: Collect supported Python versions
-        id: supported-python-versions
+        id: run-script
         uses: ./.github/actions/collect-supported-python-versions
   prebuild:
     strategy:

@@ -1,15 +1,19 @@
 name: Collect supported Python versions
 
+outputs:
+  python-versions:
+    description: 'Supported Python versions'
+    value: ${{ steps.run-script.outputs.python-versions }}
 runs:
   using: composite
   steps:
-    - name: Show Python version
-      run: python --version
-      shell: bash
+    - name: Install the latest version of uv
+      uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
     - name: Collect supported Python versions
-      id: python-versions
+      id: run-script
       run: |
-        python_versions=$(python ./scripts/supported_python_versions.py)
+        cd $GITHUB_ACTION_PATH
+        python_versions=$(uv run -- main.py $GITHUB_WORKSPACE/pyproject.toml)
         echo "$python_versions"
-        echo "value=${python_versions}" >> $GITHUB_OUTPUT
+        echo "python-versions=${python_versions}" >> $GITHUB_OUTPUT
       shell: bash

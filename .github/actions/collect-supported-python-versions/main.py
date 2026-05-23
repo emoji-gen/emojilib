@@ -1,12 +1,16 @@
-#!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 
 import json
 import re
+import sys
 import tomllib
 
 def main():
-    with open('pyproject.toml', 'rb') as f:
+    if len(sys.argv) < 2:
+        sys.exit('Please specify the path to pyproject.toml as a command-line argument.')
+
+    pyproject_path = sys.argv[1]
+    with open(pyproject_path, 'rb') as f:
         pyproject = tomllib.load(f)
 
     classifiers  = pyproject['project']['classifiers']
