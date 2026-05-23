@@ -8,10 +8,8 @@ outputs:
 runs:
   using: composite
   steps:
-    - name: Install OS dependencies
-      uses: ./.github/actions/install-os-dependencies
-    - name: Build libemoji
-      uses: ./.github/actions/build-libemoji
+    - uses: ./.github/actions/install-os-dependencies
+    - uses: ./.github/actions/build-libemoji
     - name: Upload libemoji.a
       uses: actions/upload-artifact@v7
       with:
