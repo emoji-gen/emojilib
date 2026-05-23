@@ -1,0 +1,59 @@
+name: Build emojilib
+
+outputs:
+  wheel-filename:
+    description: 'File name of the built .whl package'
+    value: ${{ steps.check-wheel-path.outputs.wheel-filename }}
+  wheel-path:
+    description: 'File path of the built .whl package'
+    value: ${{ steps.check-wheel-path.outputs.wheel-path }}
+
+runs:
+  using: composite
+  steps:
+    - name: Build
+      env:
+        ARCHFLAGS: '-arch arm64'
+      run:  |
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          python -m build --wheel
+        else
+          # If plat-name is not specified,
+          # the build will be for universal2 instead of arm64.
+          python -m build --wheel -C='--build-option=--plat-name=macosx_11_0_arm64'
+        fi
+      shell: bash
+    - name: Check build results
+      run:  |
+        file build/lib.*/*.so
+        ls -lh dist/
+      shell: bash
+    - name: Audit wheel
+      if: runner.os == 'Linux'
+      run: |
+        python -m auditwheel show dist/*.whl
+        python -m auditwheel repair dist/*.whl
+      shell: bash
+    - name: Review audit results
+      if: runner.os == 'Linux'
+      run:  |
+        ls -lh wheelhouse/
+      shell: bash
+    - name: Check wheel path
+      id: check-wheel-path
+      run: |
+        if [ "$RUNNER_OS" = "Linux" ]; then
+          WHEEL_PATH=$(find wheelhouse -name '*.whl' | xargs realpath | head -n 1)
+        else
+          WHEEL_PATH=$(find dist -name '*.whl' | xargs realpath | head -n 1)
+        fi
+        WHEEL_FILENAME=$(basename $WHEEL_PATH)
+
+        echo "wheel-filename=$WHEEL_FILENAME" >> $GITHUB_OUTPUT
+        echo "wheel-path=$WHEEL_PATH" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Test
+      run: |
+        python -m pip install "${{ steps.check-wheel-path.outputs.wheel-path }}"
+        python -m pytest
+      shell: bash

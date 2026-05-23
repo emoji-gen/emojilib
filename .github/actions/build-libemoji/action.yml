@@ -1,0 +1,19 @@
+name: Build libemoji
+
+runs:
+  using: composite
+  steps:
+    - name: Show CMake version
+      run: cmake --version
+      shell: bash
+    - name: Show Python version
+      run: python --version
+      shell: bash
+    - name: Build libemoji
+      run: |
+        cd externals/libemoji
+        cmake .
+        cmake --build .
+        ls -h lib
+      shell: bash
+

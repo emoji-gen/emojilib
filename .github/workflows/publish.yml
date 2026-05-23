@@ -1,0 +1,50 @@
+name: Publish
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+on:
+  workflow_dispatch:
+
+jobs:
+  python-versions:
+    runs-on: ubuntu-latest
+    name: Collect Python versions
+    outputs:
+      value: ${{ steps.run-script.outputs.python-versions }}
+    steps:
+      - uses: actions/checkout@v5
+      - name: Collect Python versions
+        id: run-script
+        uses: ./.github/actions/collect-python-versions
+  prebuild:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    name: Prebuild (${{ matrix.os }})
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+  build:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+        python-version: ${{ fromJson(needs.python-versions.outputs.value) }}
+    needs: [ prebuild, python-versions ]
+    runs-on: ${{ matrix.os }}
+    name: Build (${{ matrix.os }}, py${{ matrix.python-version }})
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}

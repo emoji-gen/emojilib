@@ -1,0 +1,12 @@
+name: Install OS dependencies
+
+runs:
+  using: composite
+  steps:
+    - name: Install Linux dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install libfontconfig1-dev libx11-dev \
+          libxcomposite-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev
+      shell: bash

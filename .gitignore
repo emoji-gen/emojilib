@@ -2,6 +2,7 @@
 /build
 /dist
 /venv
+/.venv
 
 __pycache__
 *.pyc
@@ -15,6 +16,7 @@ __pycache__
 *.so
 *.a
 *.c
+*.cpp
 
 # example
 *.png

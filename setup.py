@@ -5,14 +5,12 @@ import sys
 from setuptools import Extension, setup
 from Cython.Build import cythonize
 
-VERSION = '1.0.1'
-
 
 extra_objects = [
     'lib/libemoji.a',
 ]
 extra_compile_args = [
-    '-std=c11',
+    '-std=c++20',
     '-Wall',
     '-Wextra',
 ]
@@ -28,11 +26,12 @@ if sys.platform.startswith('darwin'):
     ])
 elif sys.platform.startswith('linux'):
     libraries.extend([
+        'GL',
+        'GLU',
         'dl',
         'fontconfig',
         'freetype',
-        'GL',
-        'GLU',
+        'z',
     ])
 
 
@@ -45,31 +44,9 @@ def main():
         libraries=libraries,
         extra_compile_args=extra_compile_args,
         extra_link_args=extra_link_args,
-        language='c11'
+        language='c++'
     )
-
-    setup(
-        name='emojilib',
-        version=VERSION,
-        description='Ultimate Emoji Generator library using Skia and Python C Extension',
-        url='https://github.com/emoji-gen/emojilib',
-        author='Emoji Generator',
-        author_email='ultimate.emoji.gen@gmail.com',
-        license='MIT License',
-        classifiers=[
-            'Development Status :: 5 - Production/Stable',
-            'License :: OSI Approved :: MIT License',
-            'Programming Language :: Cython',
-            'Programming Language :: Python :: Implementation :: CPython',
-            'Programming Language :: Python :: 3 :: Only',
-            'Programming Language :: Python :: 3.5',
-            'Programming Language :: Python :: 3.6',
-            'Programming Language :: Python :: 3.7',
-        ],
-        setup_requires=['pytest-runner'],
-        tests_require=['pytest'],
-        ext_modules=cythonize([extension])
-    )
+    setup(ext_modules=cythonize([extension]))
 
 
 if __name__ == '__main__':
