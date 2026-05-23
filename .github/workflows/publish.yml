@@ -54,17 +54,25 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
   publish:
-    name: Publish to PyPI
-    permissions:
-      id-token: write
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+        python-version: ${{ fromJson(needs.python-versions.outputs.value) }}
     needs:
       - build
       - python-versions
+    environment: ${{ github.event.inputs.environment }}
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    name: Publish (${{ matrix.os }}, py${{ matrix.python-version }})
     steps:
-      - name: Display Python versions
-        run: |
-          echo ${{ needs.python-versions.outputs.value }}
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.14
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.14.0
         with:
