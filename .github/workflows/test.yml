@@ -8,7 +8,7 @@ on:
   push:
 
 jobs:
-  supported-python-versions:
+  python-versions:
     runs-on: ubuntu-latest
     name: Collect Python versions
     outputs:
@@ -45,8 +45,8 @@ jobs:
         os:
           - macos-latest
           - ubuntu-latest
-        python-version: ${{ fromJson(needs.supported-python-versions.outputs.value) }}
-    needs: [ prebuild, supported-python-versions ]
+        python-version: ${{ fromJson(needs.python-versions.outputs.value) }}
+    needs: [ prebuild, python-versions ]
     runs-on: ${{ matrix.os }}
     name: Build (${{ matrix.os }}, py${{ matrix.python-version }})
     steps:
