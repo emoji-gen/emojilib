@@ -30,15 +30,8 @@ jobs:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
-      - name: Install OS dependencies
-        uses: ./.github/actions/install-os-dependencies
-      - name: Build libemoji
-        uses: ./.github/actions/build-libemoji
-      - name: Upload libemoji.a
-        uses: actions/upload-artifact@v7
-        with:
-          name: "${{ matrix.os }}_libemoji.a"
-          path: externals/libemoji/lib/libemoji.a
+      - uses: Prebuild
+        uses: ./.github/actions/prebuild
   build:
     strategy:
       matrix:

@@ -1,0 +1,19 @@
+name: Prebuild
+
+outputs:
+  artifact-name:
+    description: "Artifact name of the built libemoji.a"
+    value: "${RUNNER_OS}_libemoji.a"
+
+runs:
+  using: composite
+  steps:
+    - name: Install OS dependencies
+      uses: ./.github/actions/install-os-dependencies
+    - name: Build libemoji
+      uses: ./.github/actions/build-libemoji
+    - name: Upload libemoji.a
+      uses: actions/upload-artifact@v7
+      with:
+        name: "${{ runner.os }}_libemoji.a"
+        path: externals/libemoji/lib/libemoji.a
