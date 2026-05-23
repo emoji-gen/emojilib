@@ -60,10 +60,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish to PyPI
     steps:
+      - name: Display Python versions
+        run: |
+          echo ${{ needs.python-versions.outputs.value }}
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.14.0
         with:
           repository-url: ${{ env.PYPI_REPOSIYORY_URL }}
-      - name: Display Python versions
-        run: |
-          echo ${{ needs.python-versions.outputs.value }}
