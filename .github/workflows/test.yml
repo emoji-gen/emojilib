@@ -15,9 +15,8 @@ jobs:
       value: ${{ steps.run-script.outputs.python-versions }}
     steps:
       - uses: actions/checkout@v5
-      - name: Collect Python versions
+      - uses: ./.github/actions/collect-python-versions
         id: run-script
-        uses: ./.github/actions/collect-python-versions
   prebuild:
     strategy:
       matrix:
@@ -26,11 +25,14 @@ jobs:
           - ubuntu-latest
     runs-on: ${{ matrix.os }}
     name: Prebuild (${{ matrix.os }})
+    outputs:
+      value: ${{ steps.prebuild.outputs.artifact-name }}
     steps:
       - uses: actions/checkout@v5
         with:
           submodules: recursive
       - uses: ./.github/actions/prebuild
+        id: prebuild
   build:
     strategy:
       matrix:
