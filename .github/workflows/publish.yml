@@ -54,11 +54,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
   publish:
+    name: Publish to PyPI
+    permissions:
+      id-token: write
     needs:
       - build
       - python-versions
     runs-on: ubuntu-latest
-    name: Publish to PyPI
     steps:
       - name: Display Python versions
         run: |
