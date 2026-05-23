@@ -6,6 +6,9 @@ concurrency:
 
 on:
   workflow_dispatch:
+    inputs:
+      environment:
+          type: environment
 
 jobs:
   python-versions:
