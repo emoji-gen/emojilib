@@ -10,14 +10,14 @@ on:
 jobs:
   supported-python-versions:
     runs-on: ubuntu-latest
-    name: Collect supported Python versions
+    name: Collect Python versions
     outputs:
       value: ${{ steps.run-script.outputs.python-versions }}
     steps:
       - uses: actions/checkout@v5
-      - name: Collect supported Python versions
+      - name: Collect Python versions
         id: run-script
-        uses: ./.github/actions/collect-supported-python-versions
+        uses: ./.github/actions/collect-python-versions
   prebuild:
     strategy:
       matrix:
