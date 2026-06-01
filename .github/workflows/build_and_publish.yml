@@ -87,11 +87,15 @@ jobs:
         run: |
           echo ${{ steps.build-emojilib.outputs.wheel-path }}
           echo ${{ steps.build-emojilib.outputs.wheel-filename }}
+      - name: Create dist directory
+        run: |
+          mkdir -p "${{ runner.temp }}/dist/"
+          cp "${{ steps.build-emojilib.outputs.wheel-path }}" "${{ runner.temp }}/dist/"
       - name: Upload wheel
         uses: actions/upload-artifact@v7
         with:
           name: ${{ steps.build-emojilib.outputs.wheel-filename }}
-          path: ${{ steps.build-emojilib.outputs.wheel-path }}
+          path: ${{ runner.tmp }}/dist/
   publish:
     strategy:
       matrix:
