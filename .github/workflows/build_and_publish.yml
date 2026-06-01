@@ -12,6 +12,11 @@ on:
           description: Environment
           type: environment
           required: true
+      publish:
+          description: Publish
+          type: boolean
+          required: true
+          default: false
 
 jobs:
   python-versions:
@@ -70,7 +75,7 @@ jobs:
       - build
       - python-versions
     environment: ${{ github.event.inputs.environment }}
-    if: ${{ github.event.inputs.environment != '' }}
+    if: ${{ github.event.inputs.environment != '' &&  github.event.inputs.publish == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
