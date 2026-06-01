@@ -70,7 +70,7 @@ jobs:
       - build
       - python-versions
     environment: ${{ github.event.inputs.environment }}
-    if: environment: ${{ github.event.inputs.environment != ''}}
+    if: ${{ github.event.inputs.environment != '' }}
     runs-on: ubuntu-latest
     permissions:
       id-token: write
