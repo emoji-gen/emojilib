@@ -6,6 +6,12 @@ concurrency:
 
 on:
   push:
+  workflow_dispatch:
+    inputs:
+      environment:
+          description: Environment
+          type: environment
+          required: true
 
 jobs:
   python-versions:
@@ -53,3 +59,19 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           artifact-name: ${{ needs.prebuild.outputs.artifact-name }}
+  publish:
+    strategy:
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+        python-version: ${{ fromJson(needs.python-versions.outputs.value) }}
+    needs:
+      - build
+      - python-versions
+    environment: ${{ github.event.inputs.environment }}
+    if: environment: ${{ github.event.inputs.environment != ''}}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    name: Publish (${{ matrix.os }}, py${{ matrix.python-version }})
