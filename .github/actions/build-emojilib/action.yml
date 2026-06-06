@@ -49,6 +49,8 @@ runs:
         fi
         WHEEL_FILENAME=$(basename $WHEEL_PATH)
 
+        echo "$WHEEL_FILENAME"
+        echo "$WHEEL_PATH"
         echo "wheel-filename=$WHEEL_FILENAME" >> $GITHUB_OUTPUT
         echo "wheel-path=$WHEEL_PATH" >> $GITHUB_OUTPUT
       shell: bash
