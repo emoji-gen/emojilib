@@ -94,7 +94,7 @@ jobs:
       - name: Create output artifact name
         run: |
           name_tmpl='{{ os }}_{{ python_version }}_whl'
-          name='${{ runner.os }}_${{ matrix.python-version }}_whl'
+          name='${{ matrix.os }}_${{ matrix.python-version }}_whl'
           echo "$name_tmpl"
           echo "$name"
           echo "name_tmpl=$name_tmpl" >> $GITHUB_OUTPUT
