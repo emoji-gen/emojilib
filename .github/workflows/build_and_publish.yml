@@ -28,8 +28,6 @@ jobs:
       - uses: actions/checkout@v5
       - uses: ./.github/actions/collect-python-versions
         id: run-script
-      - run: |
-          echo ${{ steps.run-script.outputs.python-versions }} >> $GITHUB_STEP_SUMMARY
   prebuild:
     strategy:
       matrix:
