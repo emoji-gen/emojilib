@@ -1,8 +1,6 @@
 # emojilib
 [![PyPI version](https://badge.fury.io/py/emojilib.svg)](https://badge.fury.io/py/emojilib)
-[![Build Status](https://travis-ci.org/emoji-gen/emojilib.svg?branch=master)](https://travis-ci.org/emoji-gen/emojilib)
-[![wercker status](https://app.wercker.com/status/486fa62cf2efbf47c595632b1e902e58/s/master "wercker status")](https://app.wercker.com/project/byKey/486fa62cf2efbf47c595632b1e902e58)
-[![Requirements Status](https://requires.io/github/emoji-gen/emojilib/requirements.svg?branch=master)](https://requires.io/github/emoji-gen/emojilib/requirements/?branch=master)
+[![Build and Publish](https://github.com/emoji-gen/emojilib/actions/workflows/build_and_publish.yml/badge.svg)](https://github.com/emoji-gen/emojilib/actions/workflows/build_and_publish.yml)
 
 :books: Ultimate Emoji Generator library for Python
 <br><br>
