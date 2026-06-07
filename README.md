@@ -87,10 +87,8 @@ $ python setup.py build install test
 
 ### Create wheel package
 
-```
-$ pip install wheel --upgrade
-$ python setup.py bdist_wheel
-```
+To create a release, manually trigger the [build_and_publish.yml](https://github.com/emoji-gen/emojilib/actions/workflows/build_and_publish.yml) workflow via the `workflow_dispatch` event.
+
 
 ## See also
 - [emojilib (Gemfury)](https://gemfury.com/emoji-gen/python:emojilib)
