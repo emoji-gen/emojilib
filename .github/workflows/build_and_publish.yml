@@ -118,7 +118,7 @@ jobs:
       - name: Check wheel
         run: |
           ls -lh dist/
-      - name: Publish release distributions to PyPI
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.14.0
         with:
           repository-url: ${{ vars.PYPI_REPOSITORY_URL }}
