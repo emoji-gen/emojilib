@@ -66,29 +66,23 @@ $ python setup.py build
 ```
 
 ## Development
-### Dependencies
+### Install Dependencies
 
 ```
-$ pip install -r requirements-dev.txt
-```
-
-### Example
-
-```
-$ python setup.py install
-$ python ./example/example.py
+$ pip install --group dev
 ```
 
 ### Test
 
 ```
-$ python setup.py build install test
+$ pytest
 ```
 
-### Create wheel package
+### Publish
 
-To create a release, manually trigger the [build_and_publish.yml](https://github.com/emoji-gen/emojilib/actions/workflows/build_and_publish.yml) workflow via the `workflow_dispatch` event.
+Update the version in pyproject.toml to the version you want to release.
 
+Then, manually trigger the [build_and_publish.yml](https://github.com/emoji-gen/emojilib/actions/workflows/build_and_publish.yml) workflow via the workflow_dispatch event to create a release.
 
 ## See also
 - [emojilib (Gemfury)](https://gemfury.com/emoji-gen/python:emojilib)
